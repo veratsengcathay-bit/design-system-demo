@@ -1,0 +1,10 @@
+/* Angular Design System — Global Stylesheet
+ *
+ * Import this file in your angular.json "styles" array:
+ *   "styles": ["node_modules/@your-org/ui-components/styles/index.css"]
+ *
+ * Or import in your global styles.css:
+ *   @import '@your-org/ui-components/styles/index.css';
+ */
+@import './tokens.css';
+@import './components.css';

@@ -1,0 +1,101 @@
+<div class="hd-stage">
+  <div class="hd-frame" #frameEl>
+
+    <!-- ── Status bar (device chrome mock) ─────────────────────────────── -->
+    <div class="hd-statusbar">
+      <span class="hd-statusbar__time">9:41</span>
+      <span class="hd-statusbar__levels" aria-hidden="true">
+        <span class="hd-statusbar__signal"></span>
+        <span class="hd-statusbar__wifi"></span>
+        <span class="hd-statusbar__battery"></span>
+      </span>
+    </div>
+
+    <!-- ── App bar ──────────────────────────────────────────────────────── -->
+    <lib-app-bar title="Chính sách bảo hiểm" trailingIcon="search"></lib-app-bar>
+
+    <!-- ── Filter chips (horizontal scroll) ─────────────────────────────── -->
+    <div class="hd-chips">
+      @for (chip of chips; track chip; let i = $index) {
+        <lib-chip
+          [label]="chip"
+          [selected]="activeChip() === i"
+          (clicked)="selectChip(i)"
+        ></lib-chip>
+      }
+    </div>
+
+    <!-- ── Secondary category dropdowns (open the bottom sheet) ──────────── -->
+    <div class="hd-subfilters">
+      @for (f of subFilters; track f) {
+        <button type="button" class="hd-subfilter" (click)="openSheet()">
+          <span class="hd-subfilter__label">{{ f }}</span>
+          <lucide-icon [img]="chevronDownIcon" [size]="16" [strokeWidth]="2" color="currentColor"></lucide-icon>
+        </button>
+      }
+    </div>
+
+    <!-- ── Scrollable content ───────────────────────────────────────────── -->
+    <div class="hd-content">
+      <div class="hd-tip">
+        <span class="hd-tip__label">thời gian cập nhật: </span>
+        <span class="hd-tip__value">{{ updatedAt }}</span>
+      </div>
+
+      <div class="hd-cards">
+        @for (card of cards; track $index; let i = $index) {
+          <lib-policy-card
+            [statusLabel]="card.status"
+            [statusVariant]="card.variant"
+            [productName]="card.productName"
+            [fields]="card.fields"
+            [footerValue]="card.expiry"
+            (more)="onMore($event, i)"
+          ></lib-policy-card>
+        }
+      </div>
+    </div>
+
+    <!-- ── Bottom navigation ────────────────────────────────────────────── -->
+    <lib-navigation-bar
+      class="hd-navbar"
+      [items]="navItems"
+      [activeIndex]="navActive"
+    ></lib-navigation-bar>
+
+    <!-- ── More-actions popover ─────────────────────────────────────────── -->
+    @if (openMenuIndex() !== null && menuPos(); as pos) {
+      <div class="hd-overlay" (click)="closePopover()"></div>
+      <div
+        class="hd-popover"
+        [style.top.px]="pos.top"
+        [style.left.px]="pos.left"
+      >
+        @for (action of moreActions; track action) {
+          <lib-menu-item size="S" [text]="action" (clicked)="runAction(action)"></lib-menu-item>
+        }
+      </div>
+    }
+
+    <!-- ── Category filter bottom sheet ─────────────────────────────────── -->
+    @if (sheetOpen()) {
+      <div class="hd-scrim" (click)="closeSheet()"></div>
+      <div class="hd-sheet" role="dialog" aria-label="篩選分類">
+        <div class="hd-sheet__bar">
+          <span class="hd-sheet__grabber"></span>
+        </div>
+        <div class="hd-sheet__menus">
+          @for (opt of sheetOptions(); track $index; let i = $index) {
+            <lib-menu-item
+              size="M"
+              [text]="opt.label"
+              [selected]="opt.selected"
+              (clicked)="toggleOption(i)"
+            ></lib-menu-item>
+          }
+        </div>
+        <div class="hd-sheet__home-indicator"><span></span></div>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,1000 @@
+/**
+ * Component Styles — Pure CSS Token Resolution Layer
+ * All state-driven visuals are resolved via data-attribute CSS selectors.
+ * Source: Figma Make Kit components.css (converted for Angular)
+ */
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   IconButton — CSS State Resolution
+   data-icon-btn-state = default | hover | pressed | disabled
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.icon-btn {
+  background-color: var(--icon-button-bg);
+}
+.icon-btn[data-icon-btn-state="disabled"] {
+  background-color: transparent;
+}
+
+.icon-btn__state-layer {
+  background-color: transparent;
+  transition: background-color 150ms;
+}
+.icon-btn[data-icon-btn-state="hover"] .icon-btn__state-layer {
+  background-color: var(--icon-button-state-hover);
+}
+.icon-btn[data-icon-btn-state="pressed"] .icon-btn__state-layer {
+  background-color: var(--icon-button-state-pressed);
+}
+.icon-btn[data-icon-btn-state="disabled"] .icon-btn__state-layer {
+  background-color: var(--icon-button-state-disabled);
+}
+
+/* Icon colour — inherited by SVG stroke="currentColor" */
+.icon-btn__icon {
+  color: var(--icon-button-icon);           /* → --state-icon-default → bluegreen-600 #2E5245 */
+}
+.icon-btn[data-icon-btn-state="disabled"] .icon-btn__icon {
+  color: var(--icon-button-icon-disabled);  /* → --state-icon-disabled → neutral-400 #A5A5A5 */
+}
+
+@keyframes icon-btn-ripple {
+  0%   { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+.icon-btn__ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--icon-button-ripple);
+  pointer-events: none;
+  transform-origin: center center;
+  transform: scale(0);
+  animation: icon-btn-ripple 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   Button
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.btn[data-btn-appearance="outline"],
+.btn[data-btn-appearance="text"] {
+  --btn-content-color: var(--btn-outline-text);
+}
+.btn[data-btn-appearance="tonal"] {
+  --btn-content-color: var(--btn-tonal-text);
+}
+.btn[data-btn-appearance="filled"] {
+  --btn-content-color: var(--btn-filled-text);
+}
+.btn[data-btn-state="disabled"] {
+  --btn-content-color: var(--btn-disabled-text);
+}
+.btn__label,
+.btn__icon {
+  color: var(--btn-content-color, var(--btn-outline-text));
+}
+.btn[data-btn-appearance="outline"] { background-color: var(--btn-outline-bg); }
+.btn[data-btn-appearance="tonal"]   { background-color: var(--btn-tonal-bg); }
+.btn[data-btn-appearance="filled"]  { background-color: var(--btn-filled-bg); }
+.btn[data-btn-appearance="text"]    { background-color: transparent; }
+.btn[data-btn-appearance="outline"][data-btn-state="disabled"],
+.btn[data-btn-appearance="tonal"][data-btn-state="disabled"] {
+  background-color: var(--btn-disabled-bg);
+}
+.btn[data-btn-appearance="filled"][data-btn-state="disabled"] {
+  background-color: var(--btn-filled-disabled-bg);
+}
+.btn__border { display: none; }
+.btn[data-btn-appearance="outline"] .btn__border {
+  display: block;
+  border: 1px solid var(--btn-outline-border);
+}
+.btn[data-btn-appearance="tonal"] .btn__border {
+  display: block;
+  border: 1px solid var(--btn-tonal-border);
+}
+.btn[data-btn-state="disabled"] .btn__border { display: none; }
+.btn__state-layer {
+  background-color: transparent;
+  transition: background-color 150ms;
+}
+.btn[data-btn-state="hover"] .btn__state-layer {
+  background-color: var(--btn-state-hover);
+}
+.btn[data-btn-state="pressed"] .btn__state-layer {
+  background-color: var(--btn-state-pressed);
+}
+
+@keyframes btn-ripple {
+  0%   { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+.btn__ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--btn-ripple);
+  pointer-events: none;
+  transform-origin: center center;
+  transform: scale(0);
+  animation: btn-ripple 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   Chip
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.chip[data-chip-selected="false"] { background-color: var(--chip-bg-unselected); }
+.chip[data-chip-selected="true"]  { background-color: var(--chip-bg-selected); }
+.chip[data-chip-state="disabled"] { background-color: var(--chip-bg-disabled); }
+.chip__border { display: block; }
+.chip[data-chip-selected="true"] .chip__border,
+.chip[data-chip-state="disabled"] .chip__border { display: none; }
+.chip__label {
+  font-family: var(--font-family-roboto);
+  font-size: var(--font-size-sm);
+  color: var(--chip-text-unselected);
+  font-weight: var(--chip-font-weight-unselected);
+  white-space: nowrap;
+  line-height: normal;
+}
+.chip[data-chip-selected="true"] .chip__label {
+  color: var(--chip-text-selected);
+  font-weight: var(--chip-font-weight-selected);
+}
+.chip[data-chip-state="disabled"] .chip__label {
+  color: var(--chip-text-disabled);
+  font-weight: var(--chip-font-weight-unselected);
+}
+.chip__state-layer {
+  background-color: transparent;
+  transition: background-color 150ms;
+}
+.chip[data-chip-state="hover"] .chip__state-layer    { background-color: var(--chip-state-hover); }
+.chip[data-chip-state="pressed"] .chip__state-layer  { background-color: var(--chip-state-pressed); }
+
+@keyframes chip-ripple {
+  0%   { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+.chip__ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--chip-ripple);
+  pointer-events: none;
+  transform-origin: center center;
+  transform: scale(0);
+  animation: chip-ripple 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   List
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.list { background-color: var(--list-bg); box-shadow: var(--list-shadow); }
+.list__icon    { color: var(--list-icon-color); }
+.list__title   { color: var(--list-title-color); }
+.list__trailing-count { color: var(--list-trailing-count-color); }
+.list__trailing-text  { color: var(--list-trailing-text-color); }
+.list__chevron { color: var(--list-chevron-color); }
+.list[data-list-state="disabled"] .list__icon,
+.list[data-list-state="disabled"] .list__title,
+.list[data-list-state="disabled"] .list__trailing-count,
+.list[data-list-state="disabled"] .list__trailing-text,
+.list[data-list-state="disabled"] .list__chevron { color: var(--list-text-disabled); }
+.list__state-layer {
+  background-color: transparent;
+  transition: background-color 150ms;
+}
+.list[data-list-state="hover"] .list__state-layer    { background-color: var(--list-state-hover); }
+.list[data-list-state="pressed"] .list__state-layer  { background-color: var(--list-state-pressed); }
+
+@keyframes list-ripple {
+  0%   { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+.list__ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--list-ripple);
+  pointer-events: none;
+  transform-origin: center center;
+  transform: scale(0);
+  animation: list-ripple 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   Tag
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.tag[data-tag-variant="success"] { background-color: var(--tag-success-bg); }
+.tag[data-tag-variant="success"] .tag__label { color: var(--tag-success-text); }
+.tag[data-tag-variant="error"]   { background-color: var(--tag-error-bg); }
+.tag[data-tag-variant="error"] .tag__label   { color: var(--tag-error-text); }
+.tag[data-tag-variant="warning"] { background-color: var(--tag-warning-bg); }
+.tag[data-tag-variant="warning"] .tag__label { color: var(--tag-warning-text); }
+.tag[data-tag-variant="neutral"] { background-color: var(--tag-neutral-bg); }
+.tag[data-tag-variant="neutral"] .tag__label { color: var(--tag-neutral-text); }
+.tag[data-tag-variant="info"]    { background-color: var(--tag-info-bg); }
+.tag[data-tag-variant="info"] .tag__label    { color: var(--tag-info-text); }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   Accordion
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.accordion[data-accordion-selected="true"] .accordion__label  { color: var(--accordion-text-selected); }
+.accordion[data-accordion-selected="false"] .accordion__label { color: var(--accordion-text-unselected); }
+.accordion[data-accordion-selected="true"] .accordion__icon   { color: var(--accordion-icon-selected); }
+.accordion[data-accordion-selected="false"] .accordion__icon  { color: var(--accordion-icon-unselected); }
+.accordion[data-accordion-state="disabled"] .accordion__label { color: var(--accordion-text-disabled); }
+.accordion[data-accordion-state="disabled"] .accordion__icon  { color: var(--accordion-icon-disabled); }
+.accordion__border { display: none; }
+.accordion[data-accordion-selected="true"] .accordion__border {
+  display: block;
+  border-bottom: var(--accordion-border-width) solid var(--accordion-border-selected);
+}
+.accordion[data-accordion-state="disabled"] .accordion__border { display: none; }
+.accordion__state-layer {
+  background-color: transparent;
+  transition: background-color 150ms;
+}
+.accordion[data-accordion-state="hover"] .accordion__state-layer    { background-color: var(--accordion-state-hover); }
+.accordion[data-accordion-state="pressed"] .accordion__state-layer  { background-color: var(--accordion-state-pressed); }
+
+@keyframes accordion-ripple {
+  0%   { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+.accordion__ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--accordion-ripple);
+  pointer-events: none;
+  transform-origin: center center;
+  transform: scale(0);
+  animation: accordion-ripple 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   Badge
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.badge[data-badge-type="numeric"][data-badge-variant="success"] { background-color: var(--badge-success-bg); }
+.badge[data-badge-type="numeric"][data-badge-variant="success"] .badge__label { color: var(--badge-success-text); }
+.badge[data-badge-type="numeric"][data-badge-variant="neutral"] { background-color: var(--badge-neutral-bg); }
+.badge[data-badge-type="numeric"][data-badge-variant="neutral"] .badge__label { color: var(--badge-neutral-text); }
+.badge[data-badge-type="dot"][data-badge-variant="warning"] { background-color: var(--badge-warning-dot); }
+.badge[data-badge-type="dot"][data-badge-variant="error"]   { background-color: var(--badge-error-dot); }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   Avatar
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.avatar {
+  background-color: var(--avatar-bg);
+  border-radius: var(--avatar-radius);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.avatar__image { width: 100%; height: 100%; object-fit: cover; display: block; }
+.avatar__icon  { color: var(--avatar-icon-color); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.avatar__name  { color: var(--avatar-name-color); }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   Tab
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.tab {
+  display: flex;
+  flex: 1 0 0;
+  min-width: 1px;
+  align-items: center;
+  justify-content: center;
+  gap: var(--tab-gap);
+  padding: var(--tab-padding-top) var(--tab-padding-x) var(--tab-padding-bottom);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.tab[data-tab-selected="true"] .tab__label  { color: var(--tab-text-selected); }
+.tab[data-tab-selected="false"] .tab__label { color: var(--tab-text-unselected); }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   TabBar
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.tabbar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  background-color: var(--tabbar-bg);
+  box-shadow: var(--tabbar-shadow);
+}
+.tabbar__tabs-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 0 var(--tabbar-padding-x);
+}
+.tabbar__indicator-container {
+  display: flex;
+  width: 100%;
+  position: relative;
+  height: var(--tabbar-indicator-height);
+}
+.tabbar__indicator {
+  position: absolute;
+  height: var(--tabbar-indicator-height);
+  background-color: var(--tabbar-indicator-color);
+  border-radius: var(--tabbar-indicator-radius);
+  transition: var(--tabbar-indicator-transition);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   NavigationBar
+   Figma spec: indicator at TOP of button/group → nav items below → iOS bar.
+   Shadow: 0px 0px 6px 0px rgba(111,134,91,0.25) (L3 token).
+   Label color: --color-on-primary-container (#1f3c33 bluegreen-800).
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* Outer container — backdrop blur + shadow applied here */
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  background-color: var(--navbar-bg);         /* rgba(255,255,255,0.9) */
+  backdrop-filter: var(--navbar-blur);         /* blur(5px) */
+  box-shadow: var(--navbar-shadow);            /* 0 0 6px 0 rgba(111,134,91,.25) */
+}
+
+/* button/group — indicator + items live inside; no radius so indicator is not clipped */
+.navbar__group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
+}
+
+/* ── Indicator bar (TOP of button/group) ──────────────────────────────────── */
+.navbar__indicator-container {
+  position: relative;
+  width: 100%;
+  height: var(--navbar-indicator-height);      /* 4px */
+  flex-shrink: 0;
+}
+
+.navbar__indicator {
+  position: absolute;
+  top: 0;
+  width: var(--navbar-indicator-width);        /* 94px */
+  height: var(--navbar-indicator-height);      /* 4px */
+  border-radius: var(--navbar-indicator-radius); /* 2px */
+  background: linear-gradient(
+    to right,
+    var(--navbar-indicator-gradient-start),    /* #ADFFB7 */
+    var(--navbar-indicator-gradient-end)       /* #7AD985 */
+  );
+  filter: var(--navbar-indicator-shadow);      /* drop-shadow */
+  transition: var(--navbar-indicator-transition); /* 300ms slide */
+}
+
+/* ── Nav items row (below indicator) ─────────────────────────────────────── */
+.navbar__items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Individual nav item button */
+.navbar-item {
+  display: flex;
+  flex: 1 0 0;
+  min-width: 1px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--navbar-padding-top);      /* 4px */
+  padding-bottom: var(--navbar-padding-top);   /* 4px */
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: opacity 150ms ease;
+}
+
+.navbar-item[data-navbar-selected="false"] { opacity: var(--navbar-item-opacity-inactive); } /* 0.7 */
+.navbar-item[data-navbar-selected="true"]  { opacity: var(--navbar-item-opacity-active);   } /* 1.0 */
+
+/* Icon container — 34×34px per Figma */
+.navbar-item__icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--navbar-item-size);              /* 34px */
+  height: var(--navbar-item-size);             /* 34px */
+  flex-shrink: 0;
+}
+
+/* Ensure SVGs inside scale correctly */
+.navbar-item__icon-container svg,
+.navbar-item__icon-container img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Label — Be Vietnam Pro SemiBold 10px, #1f3c33 */
+.navbar-item__label {
+  font-family: var(--font-family-be-vietnam-pro);
+  font-size: var(--navbar-label-font-size);    /* 10px */
+  font-weight: var(--navbar-label-font-weight);/* 600 semibold */
+  color: var(--navbar-label-color);            /* #1f3c33 on-primary-container */
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* ── iOS Home Indicator ───────────────────────────────────────────────────── */
+.navbar__home-indicator-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: var(--navbar-home-indicator-container-height); /* 34px */
+  position: relative;
+  flex-shrink: 0;
+}
+
+.navbar__home-indicator {
+  position: absolute;
+  bottom: var(--navbar-home-indicator-bottom); /* 8px */
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--navbar-home-indicator-width);   /* 134px */
+  height: var(--navbar-home-indicator-height); /* 5px */
+  border-radius: var(--navbar-home-indicator-radius); /* 100px */
+  background-color: var(--navbar-home-indicator-bg);  /* #0d1c17 neutral-900 */
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   AppBar
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.appbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: var(--appbar-height);
+  padding: 0 var(--appbar-padding-x);
+  background-color: var(--appbar-bg);
+  gap: var(--appbar-gap);
+}
+.appbar__icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--appbar-icon-size);
+  height: var(--appbar-icon-size);
+  flex-shrink: 0;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  background-color: var(--appbar-icon-bg-default);
+  color: var(--appbar-icon-color-default);
+  border-radius: var(--appbar-icon-button-radius);
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.appbar__icon-button:active {
+  background-color: var(--appbar-icon-bg-pressed);
+  color: var(--appbar-icon-color-pressed);
+}
+.appbar__icon-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--appbar-icon-size);
+  height: var(--appbar-icon-size);
+  flex-shrink: 0;
+}
+.appbar__title {
+  flex: 1 0 0;
+  min-width: 0;
+  text-align: center;
+  font-family: var(--font-family-be-vietnam-pro);
+  font-size: var(--appbar-title-font-size);        /* 16px */
+  font-weight: var(--appbar-title-font-weight);    /* 500 medium */
+  line-height: var(--appbar-title-line-height);    /* 26px */
+  color: var(--color-on-primary-container);        /* #1f3c33 bluegreen-800 per Figma */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   Menu
+   data-menu-size   = M | S
+   data-menu-state  = default | hover | pressed | disabled
+   data-menu-selected = true | false
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.menu-item                               { background-color: var(--menu-bg); }
+.menu-item[data-menu-size="S"]           { background-color: var(--menu-bg-s); }
+.menu-item[data-menu-selected="true"]    { background-color: var(--menu-bg-selected); }
+.menu-item__text                         { color: var(--menu-text-color); }
+.menu-item__check                        { color: var(--menu-check-color); }
+
+.menu-item__state-layer {
+  background-color: transparent;
+  transition: background-color 150ms;
+}
+.menu-item[data-menu-state="hover"] .menu-item__state-layer   { background-color: var(--menu-state-hover); }
+.menu-item[data-menu-state="pressed"] .menu-item__state-layer { background-color: var(--menu-state-pressed); }
+
+@keyframes menu-ripple {
+  0%   { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+.menu-item__ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--menu-ripple);
+  pointer-events: none;
+  transform-origin: center center;
+  transform: scale(0);
+  animation: menu-ripple 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   PolicyCard — insurance policy summary card
+   Visual spec: Figma Workspace_Vera b-04.1 (node 1730:176386)
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.policy-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: var(--policy-card-bg);
+  border: 1px solid var(--policy-card-border);
+  border-radius: var(--policy-card-radius);
+}
+
+.policy-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--policy-card-gap);
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--policy-card-padding-top) var(--policy-card-padding-x) var(--policy-card-padding-bottom);
+}
+
+.policy-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.policy-card__more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--policy-card-more-color);
+}
+
+.policy-card__product {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.policy-card__label {
+  font-family: var(--font-family-roboto);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--policy-card-label-font-size);
+  line-height: 20px;
+  color: var(--policy-card-label-color);
+}
+
+.policy-card__product-name {
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--policy-card-product-font-size);
+  line-height: 22px;
+  letter-spacing: 0.32px;
+  color: var(--policy-card-product-color);
+}
+
+.policy-card__fields {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--policy-card-fields-gap);
+  width: 100%;
+}
+
+.policy-card__field {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.policy-card__value {
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--policy-card-value-font-size);
+  line-height: 22px;
+  letter-spacing: 0.24px;
+  color: var(--policy-card-value-color);
+}
+
+.policy-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--policy-card-footer-gap);
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--policy-card-footer-padding);
+  background-color: var(--policy-card-footer-bg);
+}
+
+.policy-card__footer-label {
+  font-family: var(--font-family-roboto);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--policy-card-footer-font-size);
+  line-height: 14px;
+  color: var(--policy-card-footer-label-color);
+}
+
+.policy-card__footer-value {
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--policy-card-footer-font-size);
+  line-height: 14px;
+  color: var(--policy-card-footer-value-color);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   NavigationButton — stat card (filled/24) + action pill (outline/40)
+   Figma: Workspace_Vera b-01.1 (NavigationButton component)
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.nav-button {
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+  overflow: hidden;
+  font-family: var(--font-family-be-vietnam-pro);
+}
+/* content sits above the state layer */
+.nav-button > :not(.nav-button__overlay) { position: relative; z-index: 1; }
+
+.nav-button__overlay {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
+}
+.nav-button__state-layer {
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+  transition: background-color 150ms;
+}
+.nav-button[data-nav-button-state="hover"] .nav-button__state-layer   { background-color: var(--state-layer-hover); }
+.nav-button[data-nav-button-state="pressed"] .nav-button__state-layer { background-color: var(--state-layer-pressed); }
+.nav-button__ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--color-ripple);
+  pointer-events: none;
+  transform-origin: center center;
+  transform: scale(0);
+  animation: nav-button-ripple 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes nav-button-ripple {
+  0%   { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+.nav-button__title { color: var(--nav-button-title-color); }
+.nav-button__amount {
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--nav-button-amount-font-size);
+  line-height: normal;
+  color: var(--nav-button-amount-color);
+}
+.nav-button__chevron { display: inline-flex; color: var(--nav-button-icon-color); }
+
+/* stat (filled / 24) */
+.nav-button[data-nav-button-variant="stat"] {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--nav-button-stat-gap);
+  height: var(--nav-button-stat-height);
+  padding: var(--nav-button-stat-padding-y) var(--nav-button-stat-padding-x);
+  background: var(--nav-button-stat-bg);
+  border: 1px solid var(--nav-button-stat-border);
+  border-radius: var(--nav-button-stat-radius);
+}
+.nav-button[data-nav-button-variant="stat"] .nav-button__title {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--nav-button-stat-title-font-size);
+  line-height: normal;
+  color: var(--nav-button-stat-title-color);
+}
+.nav-button[data-nav-button-variant="stat"] .nav-button__bottom {
+  display: flex;
+  align-items: center;
+}
+
+/* pill (outline / 40) */
+.nav-button[data-nav-button-variant="pill"] {
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  height: var(--nav-button-pill-height);
+  padding: 0 var(--nav-button-pill-padding-x);
+  border: var(--nav-button-pill-border-width) solid var(--nav-button-pill-border-color);
+  border-radius: var(--nav-button-pill-radius);
+  box-shadow: var(--nav-button-pill-shadow);
+  background-image: linear-gradient(114deg, rgba(250, 250, 250, 0.72) 44%, rgba(233, 255, 215, 0.648) 95%);
+}
+.nav-button[data-nav-button-variant="pill"] .nav-button__lead {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+.nav-button[data-nav-button-variant="pill"] .nav-button__title {
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--nav-button-pill-title-font-size);
+  line-height: normal;
+  color: var(--nav-button-pill-title-color);
+}
+.nav-button[data-nav-button-variant="pill"] .nav-button__right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   SectionHeader — section title row with trailing action
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: var(--section-header-height);
+  padding-left: var(--section-header-padding-left);
+  box-sizing: border-box;
+}
+.section-header__title {
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--section-header-title-font-size);
+  line-height: normal;
+  color: var(--section-header-title-color);
+}
+.section-header__action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  height: var(--section-header-height);
+  padding: 0 var(--spacing-1);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--section-header-action-font-size);
+  color: var(--section-header-action-color);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ServiceTile — quick-action icon card
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.service-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--service-tile-gap);
+  width: 100%;
+  height: var(--service-tile-height);
+  padding: var(--service-tile-padding-y) var(--service-tile-padding-x);
+  box-sizing: border-box;
+  border: 1px solid var(--service-tile-border);
+  border-radius: var(--service-tile-radius);
+  background: var(--service-tile-bg);
+  outline: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+/* Horizontal style — icon left of label (single-item group uses this) */
+.service-tile[data-service-tile-orientation="horizontal"] {
+  flex-direction: row;
+  height: var(--service-tile-horizontal-height);
+  gap: var(--service-tile-horizontal-gap);
+  padding: var(--service-tile-horizontal-padding-y) var(--service-tile-padding-x);
+}
+.service-tile[data-service-tile-state="disabled"] { cursor: not-allowed; }
+
+/* State layer + ripple */
+.service-tile__state-layer {
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+  pointer-events: none;
+  transition: background-color 150ms;
+}
+.service-tile[data-service-tile-state="hover"] .service-tile__state-layer    { background-color: var(--service-tile-state-hover); }
+.service-tile[data-service-tile-state="pressed"] .service-tile__state-layer  { background-color: var(--service-tile-state-pressed); }
+
+@keyframes service-tile-ripple {
+  0%   { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+.service-tile__ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--service-tile-ripple);
+  pointer-events: none;
+  transform-origin: center center;
+  transform: scale(0);
+  animation: service-tile-ripple 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.service-tile__icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--service-tile-icon-size);
+  height: var(--service-tile-icon-size);
+}
+.service-tile__icon img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.service-tile__label {
+  position: relative;
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--service-tile-label-font-size);
+  line-height: normal;
+  text-align: center;
+  color: var(--service-tile-label-color);
+  white-space: nowrap;
+}
+
+/* ── Service Tile Group — quantity-adaptive layout ────────────────────────── */
+.service-tile-group {
+  display: flex;
+  align-items: stretch;
+  gap: var(--service-tile-group-gap);
+  width: 100%;
+  box-sizing: border-box;
+}
+/* Single item → full-width horizontal tile */
+.service-tile-group[data-service-tile-group-layout="single"] { display: block; }
+/* 2–3 items → vertical tiles sharing the row equally */
+.service-tile-group[data-service-tile-group-layout="row"] > lib-service-tile {
+  flex: 1 1 0;
+  min-width: 0;
+}
+/* 4+ items → fixed-width vertical tiles, horizontal scroll (≈4 visible) */
+.service-tile-group[data-service-tile-group-layout="scroll"] {
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.service-tile-group[data-service-tile-group-layout="scroll"]::-webkit-scrollbar { display: none; }
+.service-tile-group[data-service-tile-group-layout="scroll"] > lib-service-tile {
+  flex: 0 0 calc((100% - var(--service-tile-group-gap) * 3) / 4);
+  scroll-snap-align: start;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ProgressPagination — fixed-width sliding segment inside a pill container
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.progress-pagination {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: var(--progress-pagination-container-width);
+  height: var(--progress-pagination-container-height);
+  padding: var(--progress-pagination-container-padding);
+  background-color: var(--progress-pagination-container-bg);
+  border: var(--progress-pagination-container-border);
+  border-radius: var(--progress-pagination-container-radius);
+  flex-shrink: 0;
+}
+.progress-pagination__segment {
+  width: var(--progress-pagination-segment-width);
+  height: var(--progress-pagination-segment-height);
+  background-color: var(--progress-pagination-segment-bg);
+  border-radius: var(--progress-pagination-segment-radius);
+  flex-shrink: 0;
+  transition: var(--progress-pagination-transition);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   Carousel — horizontal scroll-snap banner slider + progress pagination
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--carousel-indicator-margin-top);
+  width: var(--carousel-banner-width);
+  max-width: 100%;
+}
+.carousel__slider {
+  display: flex;
+  gap: var(--carousel-banner-gap);
+  width: 100%;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  outline: none;
+}
+.carousel__slider::-webkit-scrollbar { display: none; }
+.carousel__banner {
+  position: relative;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: var(--carousel-banner-width);
+  height: var(--carousel-banner-height);
+  border-radius: var(--carousel-banner-radius);
+  border: var(--carousel-banner-border);
+  background-color: var(--carousel-banner-bg);
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+.carousel__banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.carousel__indicator {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

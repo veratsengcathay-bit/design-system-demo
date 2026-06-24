@@ -1,0 +1,220 @@
+/* ── Stage / phone frame ─────────────────────────────────────────────────── */
+.hd-stage {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px;
+  min-height: 100vh;
+  background: #e8eceb;
+  box-sizing: border-box;
+}
+
+.hd-frame {
+  position: relative;
+  width: 375px;
+  height: 812px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border-radius: 40px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+}
+
+/* ── Status bar (device chrome mock) ─────────────────────────────────────── */
+.hd-statusbar {
+  flex-shrink: 0;
+  height: 50px;
+  padding: 21px 16px 0;
+  box-sizing: border-box;
+  background: var(--color-surface-container-high);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hd-statusbar__time {
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-semibold);
+  font-size: 15px;
+  color: var(--color-neutral-900);
+}
+.hd-statusbar__levels {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.hd-statusbar__signal,
+.hd-statusbar__wifi,
+.hd-statusbar__battery {
+  display: inline-block;
+  background: var(--color-neutral-900);
+}
+.hd-statusbar__signal  { width: 18px; height: 11px; clip-path: polygon(0 100%,18% 100%,18% 60%,0 60%,0 100%,38% 100%,38% 40%,20% 40%,20% 100%,58% 100%,58% 20%,40% 20%,40% 100%,78% 100%,78% 0,60% 0,60% 100%); }
+.hd-statusbar__wifi    { width: 16px; height: 11px; border-radius: 2px; }
+.hd-statusbar__battery { width: 24px; height: 11px; border-radius: 3px; }
+
+/* ── Filter chips row ────────────────────────────────────────────────────── */
+.hd-chips {
+  flex-shrink: 0;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--color-surface-container-high);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.hd-chips::-webkit-scrollbar { display: none; }
+
+/* ── Secondary category dropdowns ────────────────────────────────────────── */
+.hd-subfilters {
+  flex-shrink: 0;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 6px 16px 12px;
+  background: var(--color-surface-container-high);
+}
+.hd-subfilter {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-on-surface-heading);
+}
+.hd-subfilter__label {
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  color: var(--color-on-surface-heading);
+}
+
+/* ── Scrollable content ──────────────────────────────────────────────────── */
+.hd-content {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  background: var(--color-surface-container-high);
+  padding: 0 12px 112px;
+  box-sizing: border-box;
+  scrollbar-width: none;
+}
+.hd-content::-webkit-scrollbar { display: none; }
+
+.hd-tip {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0;
+  font-size: var(--font-size-2xs);
+}
+.hd-tip__label {
+  font-family: var(--font-family-roboto);
+  font-weight: var(--font-weight-regular);
+  line-height: 14px;
+  letter-spacing: 0.2px;
+  color: var(--color-on-surface-dim);
+}
+.hd-tip__value {
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-medium);
+  line-height: 18px;
+  color: var(--color-neutral-900);
+  white-space: pre;
+}
+
+.hd-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Bottom navigation ───────────────────────────────────────────────────── */
+.hd-navbar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 4;
+}
+
+/* ── More-actions popover ────────────────────────────────────────────────── */
+.hd-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+.hd-popover {
+  position: absolute;
+  z-index: 11;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow: hidden;
+  background: var(--color-surface-container-high);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+}
+
+/* ── Category filter bottom sheet ────────────────────────────────────────── */
+.hd-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: var(--color-scrim);
+  opacity: 0.32;
+}
+.hd-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 21;
+  display: flex;
+  flex-direction: column;
+  max-height: 64%;
+  background: var(--color-surface-container-high);
+  border-top-left-radius: var(--radius-xl);
+  border-top-right-radius: var(--radius-xl);
+  overflow: hidden;
+}
+.hd-sheet__bar {
+  flex-shrink: 0;
+  height: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hd-sheet__grabber {
+  width: 36px;
+  height: 5px;
+  border-radius: var(--radius-full);
+  background: var(--color-neutral-200);
+}
+.hd-sheet__menus {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.hd-sheet__menus::-webkit-scrollbar { display: none; }
+.hd-sheet__home-indicator {
+  flex-shrink: 0;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+}
+.hd-sheet__home-indicator span {
+  width: 134px;
+  height: 5px;
+  border-radius: var(--radius-full);
+  background: var(--color-neutral-900);
+}

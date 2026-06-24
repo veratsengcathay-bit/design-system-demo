@@ -1,0 +1,28 @@
+{
+  "name": "sag-app-component",
+  "version": "0.0.1",
+  "description": "Angular design system component library built from Figma design tokens",
+  "keywords": [
+    "angular",
+    "design-system",
+    "components",
+    "ui-components",
+    "button",
+    "chip",
+    "badge",
+    "avatar",
+    "accordion",
+    "navigation"
+  ],
+  "author": "anpang136",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^19.2.0",
+    "@angular/core": "^19.2.0",
+    "lucide-angular": ">=1.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

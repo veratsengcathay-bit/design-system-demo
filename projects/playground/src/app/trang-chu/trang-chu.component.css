@@ -1,0 +1,369 @@
+/* ── Stage / phone frame ─────────────────────────────────────────────────── */
+.tc-stage {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px;
+  min-height: 100vh;
+  background: #e8eceb;
+  box-sizing: border-box;
+}
+.tc-frame {
+  position: relative;
+  width: 375px;
+  height: 812px;
+  overflow: hidden;
+  background: var(--color-surface-container-high);
+  border-radius: 40px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+}
+.tc-scroll {
+  position: absolute;
+  inset: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.tc-scroll::-webkit-scrollbar { display: none; }
+
+/* ── Header (green personal section) ─────────────────────────────────────── */
+.tc-header {
+  position: relative;
+  overflow: hidden;
+  min-height: 316px;
+  box-sizing: border-box;
+  padding: 100px 20px 0;
+  background-image: linear-gradient(179deg, #edf0c2 2%, #c0ffc3 27%);
+}
+.tc-header__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.tc-header__tree { position: absolute; }
+.tc-header__tree--1 { right: 7px; top: 70px; width: 230px; }
+.tc-header__tree--2 { right: -70px; top: 110px; width: 250px; }
+/* frosted white wave that transitions green → white mission */
+.tc-header__cover {
+  position: absolute;
+  left: 0;
+  right: -2px;
+  bottom: 0;
+  width: calc(100% + 2px);
+  height: 82px;
+}
+/* thin white accent curves riding the crest of the wave */
+.tc-header__curve {
+  position: absolute;
+  left: 0;
+  right: -2px;
+  width: calc(100% + 2px);
+  height: 31px;
+}
+.tc-header__curve--1 { bottom: 58px; opacity: 0.9; }
+.tc-header__curve--2 { bottom: 64px; opacity: 0.55; }
+.tc-header__curve--3 { bottom: 52px; opacity: 0.7; }
+
+/* status bar */
+.tc-statusbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 3;
+  height: 50px;
+  padding: 21px 16px 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tc-statusbar__time {
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-semibold);
+  font-size: 15px;
+  color: var(--color-neutral-900);
+}
+.tc-statusbar__levels { display: flex; align-items: center; gap: 5px; }
+.tc-statusbar__signal,
+.tc-statusbar__wifi,
+.tc-statusbar__battery { display: inline-block; background: var(--color-neutral-900); }
+.tc-statusbar__signal  { width: 18px; height: 11px; }
+.tc-statusbar__wifi    { width: 16px; height: 11px; border-radius: 2px; }
+.tc-statusbar__battery { width: 24px; height: 11px; border-radius: 3px; }
+
+/* commission card */
+.tc-commission {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 28px;
+}
+.tc-commission__line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.tc-dashboard {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 38px;
+  padding: 0 12px 0 16px;
+  border: 1px solid var(--color-outline);          /* #b9f4a8 */
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
+  font-family: var(--font-family-roboto);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xs);
+  color: var(--color-on-surface);                   /* #2e5245 */
+}
+
+.tc-amount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10px;
+}
+.tc-amount__label {
+  font-family: var(--font-family-roboto);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-2xs);
+  color: var(--color-on-surface-variant);           /* #3a876b */
+}
+.tc-amount__value {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+.tc-amount__number {
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-semibold);
+  font-size: 26px;
+  line-height: normal;
+  opacity: 0.9;
+  color: var(--color-on-primary-container);         /* #1f3c33 */
+}
+.tc-amount__unit {
+  font-family: var(--font-family-roboto);
+  font-size: var(--font-size-sm);
+  color: var(--color-on-surface-variant);
+  padding-bottom: 5px;
+}
+.tc-amount__eye {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  margin-left: 8px;
+  margin-bottom: 4px;
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
+  color: var(--color-on-surface);
+}
+.tc-commission__sales {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-family: var(--font-family-roboto);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-2xs);
+  letter-spacing: 0.6px;
+  color: var(--color-on-surface-variant);
+}
+
+/* ── Mission section (white) — the header's white wave forms the transition ─ */
+.tc-mission {
+  position: relative;
+  margin-top: -1px;
+  padding: 0 16px 96px;
+  background: var(--color-surface-container-high);
+}
+
+/* floating pay pill — in normal flow, lifted up to straddle the white wave */
+.tc-pay-pill {
+  position: relative;
+  z-index: 2;
+  margin: -36px 0 16px;
+}
+.tc-pay-pill__icon { width: 32px; height: 32px; display: block; }
+
+/* stat cards */
+.tc-stats {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tc-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0 16px;
+}
+
+/* quick action grid */
+.tc-services {
+  display: flex;
+  gap: 8px;
+}
+
+/* calendar action button */
+.tc-calendar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 32px;
+  padding: 0 12px 0 16px;
+  border: 1px solid var(--color-secondary-border);   /* #bdefbf */
+  border-radius: var(--radius-xl);
+  background: var(--color-secondary-container);       /* #e2f9e3 */
+  cursor: pointer;
+  font-family: var(--font-family-roboto);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xs);
+  color: var(--color-green-700);                      /* #116f2b */
+}
+
+/* week calendar widget */
+.tc-week {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  box-sizing: border-box;
+  background: var(--color-surface-container);
+  border: 1px solid var(--color-outline-grey);
+  border-radius: var(--radius-2xl);
+}
+.tc-week__header { display: flex; }
+.tc-week__head-cell {
+  flex: 1 0 0;
+  text-align: center;
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-2xs);
+  line-height: 14px;
+  color: var(--color-neutral-400);                   /* #a5a5a5 */
+}
+.tc-week__row { display: flex; }
+.tc-week__cell {
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px 6px;
+}
+.tc-week__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-900);                   /* #0d1c17 */
+}
+.tc-week__cell[data-status="disabled"] .tc-week__num { color: var(--color-neutral-400); }
+.tc-week__cell[data-status="current"] .tc-week__num {
+  background: var(--color-secondary);                /* lime #c3e874 */
+  border-radius: var(--radius-full);
+}
+.tc-week__dot { width: 6px; height: 6px; border-radius: var(--radius-full); background: transparent; }
+.tc-week__dot.is-on { background: var(--color-green-600); }  /* #218b3e */
+
+.tc-week__list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 55px;
+  padding: 16px;
+  box-sizing: border-box;
+  background: var(--color-surface-container-high);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 2.5px rgba(198, 198, 198, 0.25);
+  cursor: pointer;
+}
+.tc-week__list-title {
+  font-family: var(--font-family-roboto);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  color: var(--color-on-primary-container);          /* #1f3c33 */
+}
+.tc-week__list-amount {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-on-primary-container);
+}
+.tc-week__list-amount > span {
+  font-family: var(--font-family-be-vietnam-pro);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xl);
+}
+
+/* banner */
+.tc-banner {
+  width: 100%;
+  height: 80px;
+  border: 0.5px solid var(--color-neutral-200);      /* #dadcdc */
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.tc-banner__img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tc-banner__bar { display: flex; justify-content: center; padding-top: 4px; }
+.tc-banner__progress {
+  position: relative;
+  width: 44px;
+  height: 14px;
+  border: 0.5px solid #d9d9d9;
+  border-radius: var(--radius-2xl);
+  background: #f8f3f3;
+}
+.tc-banner__progress::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 19px;
+  height: 6px;
+  border-radius: 6px;
+  background: var(--color-green-700);                 /* #1d722f ~ */
+}
+
+/* ── App bar (overlay) ───────────────────────────────────────────────────── */
+.tc-appbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 5;
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 6px 20px 4px;
+  box-sizing: border-box;
+}
+.tc-logo { display: inline-flex; align-items: center; gap: 4px; height: 40px; }
+.tc-logo__leaf { height: 24px; width: 32px; display: block; }
+.tc-logo__word { height: 20px; width: 137px; display: block; }
+.tc-appbar__actions { display: inline-flex; align-items: center; gap: 8px; }
+
+/* ── Bottom navigation ───────────────────────────────────────────────────── */
+.tc-navbar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 4;
+}

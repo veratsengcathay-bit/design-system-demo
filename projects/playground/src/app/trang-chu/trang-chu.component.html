@@ -1,0 +1,148 @@
+<div class="tc-stage">
+  <div class="tc-frame">
+
+    <!-- ── Scrollable area ──────────────────────────────────────────────── -->
+    <div class="tc-scroll">
+
+      <!-- ── Personal / commission header (green gradient) ──────────────── -->
+      <header class="tc-header">
+        <div class="tc-header__bg" aria-hidden="true">
+          <img class="tc-header__tree tc-header__tree--1" [src]="asset + 'tree-1.svg'" alt="" />
+          <img class="tc-header__tree tc-header__tree--2" [src]="asset + 'tree-2.svg'" alt="" />
+          <img class="tc-header__cover" [src]="asset + 'white-cover.svg'" alt="" />
+          <img class="tc-header__curve tc-header__curve--1" [src]="asset + 'curve.svg'" alt="" />
+          <img class="tc-header__curve tc-header__curve--2" [src]="asset + 'curve-1.svg'" alt="" />
+          <img class="tc-header__curve tc-header__curve--3" [src]="asset + 'curve-2.svg'" alt="" />
+        </div>
+
+        <!-- status bar -->
+        <div class="tc-statusbar">
+          <span class="tc-statusbar__time">9:41</span>
+          <span class="tc-statusbar__levels" aria-hidden="true">
+            <span class="tc-statusbar__signal"></span>
+            <span class="tc-statusbar__wifi"></span>
+            <span class="tc-statusbar__battery"></span>
+          </span>
+        </div>
+
+        <!-- commission card -->
+        <div class="tc-commission">
+          <div class="tc-commission__line">
+            <lib-avatar gender="female" name="Jean Doe" size="md"></lib-avatar>
+            <button type="button" class="tc-dashboard">
+              <span>Dashboard</span>
+              <lucide-icon [img]="chevronRight" [size]="12" [strokeWidth]="2" color="currentColor"></lucide-icon>
+            </button>
+          </div>
+
+          <div class="tc-amount">
+            <span class="tc-amount__label">Tổng hoa hồng</span>
+            <div class="tc-amount__value">
+              <span class="tc-amount__number">{{ balanceVisible() ? balance : '•••••••••' }}</span>
+              <span class="tc-amount__unit">{{ currency }}</span>
+              <button type="button" class="tc-amount__eye" (click)="toggleBalance()" aria-label="顯示/隱藏餘額">
+                <lucide-icon [img]="balanceVisible() ? eyeIcon : eyeClosedIcon" [size]="14" [strokeWidth]="2" color="currentColor"></lucide-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="tc-commission__sales">
+            <span>Doanh số</span>
+            <span>{{ salesRange }}</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ── Mission section (white, rounded top) ───────────────────────── -->
+      <section class="tc-mission">
+
+        <!-- Floating "Chờ thanh toán" pill -->
+        <div class="tc-pay-pill">
+          <lib-navigation-button variant="pill" title="Chờ thanh toán" amount="20">
+            <img lead class="tc-pay-pill__icon" [src]="asset + 'icon-pay.png'" alt="" />
+          </lib-navigation-button>
+        </div>
+
+        <!-- Two stat cards -->
+        <div class="tc-stats">
+          <lib-navigation-button variant="stat" title="Đơn nhập liệu" amount="10"></lib-navigation-button>
+          <lib-navigation-button variant="stat" title="Đơn cần bổ sung" amount="2"></lib-navigation-button>
+        </div>
+
+        <!-- Quick action -->
+        <div class="tc-block">
+          <lib-section-header title="快捷服務" actionLabel="More"></lib-section-header>
+          <div class="tc-services">
+            @for (s of services; track s.label) {
+              <lib-service-tile [label]="s.label" [iconSrc]="asset + s.icon"></lib-service-tile>
+            }
+          </div>
+        </div>
+
+        <!-- Calendar / renewal -->
+        <div class="tc-block">
+          <lib-section-header title="開始續保" [hasProjectedAction]="true">
+            <button action type="button" class="tc-calendar-btn">
+              <span>Calendar</span>
+              <lucide-icon [img]="calendarIcon" [size]="16" [strokeWidth]="2" color="currentColor"></lucide-icon>
+            </button>
+          </lib-section-header>
+
+          <div class="tc-week">
+            <div class="tc-week__header">
+              @for (d of weekDays; track d) {
+                <span class="tc-week__head-cell">{{ d }}</span>
+              }
+            </div>
+            <div class="tc-week__row">
+              @for (day of days; track day.n) {
+                <div class="tc-week__cell" [attr.data-status]="day.status ?? 'enable'">
+                  <span class="tc-week__num">{{ day.n }}</span>
+                  <span class="tc-week__dot" [class.is-on]="day.dot"></span>
+                </div>
+              }
+            </div>
+
+            <a class="tc-week__list">
+              <span class="tc-week__list-title">Đơn nhập liệu</span>
+              <span class="tc-week__list-amount">
+                <span>20</span>
+                <lucide-icon [img]="chevronRight" [size]="20" [strokeWidth]="2" color="currentColor"></lucide-icon>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Ads / news -->
+        <div class="tc-block">
+          <lib-section-header title="最新消息" actionLabel="More"></lib-section-header>
+          <div class="tc-banner">
+            <img class="tc-banner__img" [src]="asset + 'banner-promo.png'" alt="Trân quý từng khoảnh khắc" />
+          </div>
+          <div class="tc-banner__bar">
+            <span class="tc-banner__progress"></span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ── App bar (overlay, top) ───────────────────────────────────────── -->
+    <div class="tc-appbar">
+      <span class="tc-logo">
+        <img class="tc-logo__leaf" [src]="asset + 'logo-leaf.svg'" alt="" />
+        <img class="tc-logo__word" [src]="asset + 'logo-wordmark.svg'" alt="Smart Agent GO" />
+      </span>
+      <span class="tc-appbar__actions">
+        <lib-icon-button icon="search" size="sm" borderVariant="white" aria-label="搜尋"></lib-icon-button>
+        <lib-icon-button icon="bell" size="sm" borderVariant="white" [showDot]="true" aria-label="通知"></lib-icon-button>
+      </span>
+    </div>
+
+    <!-- ── Bottom navigation ────────────────────────────────────────────── -->
+    <lib-navigation-bar
+      class="tc-navbar"
+      [items]="navItems"
+      [activeIndex]="navActive"
+    ></lib-navigation-bar>
+  </div>
+</div>

@@ -1,0 +1,663 @@
+/**
+ * ╔══════════════════════════════════════════════════════════════════════════════╗
+ * ║                      DESIGN SYSTEM - THREE-LAYER ARCHITECTURE                ║
+ * ╠══════════════════════════════════════════════════════════════════════════════╣
+ * ║  Layer 1: FOUNDATION  → Primitive design values (color, spacing, etc.)      ║
+ * ║  Layer 2: SEMANTIC    → Cross-component meaning (surface, state, etc.)      ║
+ * ║  Layer 3: COMPONENT   → Thin mapping adapters (component-specific aliases)  ║
+ * ╠══════════════════════════════════════════════════════════════════════════════╣
+ * ║  Source: Figma Make Kit Variables (Color, Spacing, Radius, Shadow, Typo)    ║
+ * ╚══════════════════════════════════════════════════════════════════════════════╝
+ */
+
+:root {
+  /* ════════════════════════════════════════════════════════════════════════════
+     LAYER 1: FOUNDATION (Primitive)
+     ════════════════════════════════════════════════════════════════════════════ */
+
+  /* ── COLOR FOUNDATION ───────────────────────────────────────────────────── */
+
+  /* Neutral */
+  --color-neutral-0: rgba(255, 255, 255, 1);
+  --color-neutral-0-60: rgba(255, 255, 255, 0.6);
+  --color-neutral-0-90: rgba(255, 255, 255, 0.9);
+  --color-neutral-10: rgba(250, 250, 250, 1);
+  --color-neutral-20: rgba(248, 248, 248, 1);
+  --color-neutral-30: rgba(231, 231, 231, 1);
+  --color-neutral-50: rgba(246, 249, 248, 1);
+  --color-neutral-200: rgba(218, 220, 220, 1);
+  --color-neutral-400: rgba(165, 165, 165, 1);
+  --color-neutral-600: rgba(132, 132, 132, 1);
+  --color-neutral-700: rgba(95, 109, 106, 1);
+  --color-neutral-800: rgba(54, 69, 64, 1);
+  --color-neutral-800-opacity-10: rgba(54, 69, 64, 0.1);
+  --color-neutral-800-opacity-87: rgba(54, 69, 64, 0.87);
+  --color-neutral-900: rgba(13, 28, 23, 1);
+  --color-neutral-900-opacity-12: rgba(13, 28, 23, 0.12);
+
+  /* BlueGreen */
+  --color-bluegreen-300: rgba(80, 180, 92, 1);
+  --color-bluegreen-400: rgba(98, 148, 137, 1);
+  --color-bluegreen-500: rgba(58, 135, 107, 1);
+  --color-bluegreen-600: rgba(46, 82, 69, 1);
+  --color-bluegreen-700: rgba(41, 140, 127, 1);
+  --color-bluegreen-700-opacity-8: rgba(41, 140, 127, 0.08);
+  --color-bluegreen-800: rgba(31, 60, 51, 1);
+
+  /* Green */
+  --color-green-30: rgba(225, 239, 222, 1);
+  --color-green-40: rgba(236, 244, 232, 1);
+  --color-green-50: rgba(218, 241, 229, 1);
+  --color-green-60: rgba(185, 244, 168, 1);
+  --color-green-80: rgba(189, 239, 191, 1);
+  --color-green-100: rgba(226, 249, 227, 1);
+  --color-green-150: rgba(195, 232, 116, 1);
+  --color-green-200: rgba(116, 209, 45, 1);
+  --color-green-400: rgba(47, 159, 109, 1);
+  --color-green-600: rgba(33, 139, 62, 1);
+  --color-green-700: rgba(17, 111, 43, 1);
+  --color-green-800: rgba(29, 114, 47, 1);
+
+  /* Orange */
+  --color-orange-100: rgba(255, 243, 224, 1);
+  --color-orange-200: rgba(255, 224, 178, 1);
+  --color-orange-300: rgba(255, 204, 128, 1);
+  --color-orange-400: rgba(255, 183, 77, 1);
+  --color-orange-500: rgba(255, 149, 2, 1);
+  --color-orange-600: rgba(251, 140, 0, 1);
+  --color-orange-700: rgba(245, 124, 0, 1);
+  --color-orange-800: rgba(239, 108, 0, 1);
+  --color-orange-900: rgba(230, 81, 0, 1);
+
+  /* Red */
+  --color-red-100: rgba(255, 245, 245, 1);
+  --color-red-200: rgba(255, 205, 210, 1);
+  --color-red-300: rgba(239, 154, 154, 1);
+  --color-red-400: rgba(229, 115, 115, 1);
+  --color-red-500: rgba(224, 62, 26, 1);
+  --color-red-600: rgba(211, 47, 47, 1);
+  --color-red-700: rgba(198, 40, 40, 1);
+  --color-red-800: rgba(183, 28, 28, 1);
+  --color-red-900: rgba(139, 0, 0, 1);
+
+  /* Blue */
+  --color-blue-50: rgba(227, 245, 252, 1);
+  --color-blue-100: rgba(184, 230, 247, 1);
+  --color-blue-200: rgba(140, 213, 242, 1);
+  --color-blue-300: rgba(102, 197, 236, 1);
+  --color-blue-400: rgba(81, 184, 233, 1);
+  --color-blue-500: rgba(69, 172, 229, 1);
+  --color-blue-600: rgba(63, 158, 215, 1);
+  --color-blue-700: rgba(55, 139, 195, 1);
+  --color-blue-800: rgba(51, 122, 175, 1);
+  --color-blue-900: rgba(41, 91, 140, 1);
+
+  /* SAG brand greys (Figma: SAG/Blue-grey, SAG/Charcoal-grey) */
+  --color-bluegrey: rgba(135, 145, 149, 1);      /* #879195 */
+  --color-charcoal-grey: rgba(55, 71, 79, 1);    /* #37474F */
+  --color-bluegreen-650: rgba(55, 95, 71, 1);    /* #375f47 — section heading green */
+
+  /* ── SPACING FOUNDATION ────────────────────────────────────────────────── */
+
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+
+  /* ── RADIUS FOUNDATION ─────────────────────────────────────────────────── */
+
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 99px;
+
+  /* ── SHADOW FOUNDATION ─────────────────────────────────────────────────── */
+
+  /* Primitive offsets / blur / spread (compose shadows from these) */
+  --shadow-x-0: 0px;
+  --shadow-y-0: 0px;
+  --shadow-y-2: 2px;
+  --shadow-blur-2: 2px;
+  --shadow-blur-4: 4px;
+  --shadow-blur-5: 5px;
+  --shadow-blur-6: 6px;
+  --shadow-blur-10: 10px;
+  --shadow-blur-12: 12px;
+  --shadow-spread-0: 0px;
+
+  /* Shadow colors */
+  --shadow-color-neutral-xs: rgba(198, 198, 198, 0.25);
+  --shadow-color-brand-halo: rgba(117, 123, 109, 0.25);
+  --shadow-color-brand-glow: rgba(146, 168, 120, 0.25);
+  --shadow-color-brand-float: rgba(111, 134, 91, 0.25);
+  --shadow-color-brand-edge-inner: rgba(146, 168, 120, 0.15);
+  --shadow-color-brand-raise: rgba(85, 133, 108, 0.16);
+  --shadow-color-brand-emphasis: rgba(114, 161, 106, 0.25);
+  --shadow-color-brand-diffuse: rgba(82, 101, 65, 0.04);
+
+  /* ── TYPOGRAPHY FOUNDATION ─────────────────────────────────────────────── */
+
+  --font-family-be-vietnam-pro: "Be Vietnam Pro", sans-serif;
+  --font-family-roboto: "Roboto", sans-serif;
+  --font-size-2xs: 10px;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
+  --line-height-tight: 1;
+  --line-height-snug: 1.286;
+  --line-height-normal: 1.444;
+  --line-height-relaxed: 1.5;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* ════════════════════════════════════════════════════════════════════════════
+     LAYER 2: SEMANTIC (System Meaning)
+     ════════════════════════════════════════════════════════════════════════════ */
+
+  /* ── COLOR SEMANTIC ────────────────────────────────────────────────────── */
+
+  --color-ripple: var(--color-neutral-800-opacity-10);
+  --color-scrim: var(--color-neutral-800-opacity-87);
+
+  /* Primary */
+  --color-primary: var(--color-bluegreen-700);
+  --color-on-primary: var(--color-neutral-0);
+  --color-primary-container: var(--color-green-50);
+  --color-primary-container-variant: var(--color-bluegreen-700-opacity-8);
+  --color-on-primary-container: var(--color-bluegreen-800);
+
+  /* Secondary */
+  --color-secondary: var(--color-green-150);
+  --color-on-secondary: var(--color-neutral-900);
+  --color-secondary-container: var(--color-green-100);
+  --color-secondary-border: var(--color-green-80);
+  --color-on-secondary-container: var(--color-green-700);
+
+  /* Tertiary */
+  --color-tertiary: var(--color-blue-600);
+  --color-on-tertiary: var(--color-neutral-0);
+  --color-tertiary-container: var(--color-blue-50);
+  --color-on-tertiary-container: var(--color-blue-900);
+
+  /* Surface */
+  --color-surface: var(--color-neutral-50);
+  --color-surface-dim: var(--color-neutral-0-90);
+  --color-surface-container: var(--color-neutral-10);
+  --color-surface-container-high: var(--color-neutral-0);
+  --color-surface-container-high-60: var(--color-neutral-0-60);
+  --color-surface-container-low: var(--color-neutral-20);
+  --color-on-surface: var(--color-bluegreen-600);
+  --color-on-surface-variant: var(--color-bluegreen-500);
+  --color-on-surface-dim: var(--color-neutral-700);
+  --color-on-surface-muted: var(--color-bluegrey);        /* secondary label text #879195 */
+  --color-on-surface-heading: var(--color-charcoal-grey); /* heading / title text #37474F */
+  --color-on-surface-section: var(--color-bluegreen-650); /* section header label #375f47 */
+
+  /* Outline / Border */
+  --color-outline: var(--color-green-60);
+  --color-outline-variant: var(--color-green-50);
+  --color-outline-subtle: var(--color-green-30);           /* faint card border #e1efde */
+  --color-outline-focused: var(--color-green-200);
+  --color-outline-white: var(--color-neutral-0);
+  --color-outline-grey: var(--color-neutral-30);
+
+  /* Disable */
+  --color-disable-container: var(--color-neutral-30);
+  --color-on-disable-container: var(--color-neutral-400);
+  --color-disable: var(--color-neutral-900-opacity-12);
+  --color-on-disable: var(--color-neutral-0);
+
+  /* Error */
+  --color-error: var(--color-red-600);
+  --color-on-error: var(--color-neutral-0);
+  --color-error-container: var(--color-red-100);
+  --color-on-error-container: var(--color-red-900);
+
+  /* Warning */
+  --color-warning: var(--color-orange-600);
+  --color-on-warning: var(--color-neutral-0);
+  --color-warning-container: var(--color-orange-100);
+  --color-on-warning-container: var(--color-orange-900);
+
+  /* Success */
+  --color-success-container: var(--color-green-50);
+  --color-on-success-container: var(--color-bluegreen-800);
+
+  /* Info */
+  --color-info-container: var(--color-blue-50);
+  --color-on-info-container: var(--color-blue-900);
+
+  /* Neutral (for tags/labels) */
+  --color-neutral-container: var(--color-neutral-30);
+  --color-on-neutral-container: var(--color-neutral-400);
+
+  /* ── GRADIENT TOKENS ──────────────────────────────────────────────────── */
+
+  --gradient-border-success: linear-gradient(90deg, #50B45C 0%, #A4FDAE 43%, #7AD985 100%);
+
+  /* ── INTERACTIVE STATE ──────────────────────────────────────────────────── */
+
+  --state-layer-hover: var(--color-primary-container-variant);
+  --state-layer-pressed: var(--color-primary-container-variant);
+  --state-layer-disabled: var(--color-disable);
+  --state-icon-default: var(--color-on-surface);
+  --state-icon-disabled: var(--color-on-disable-container);
+
+  /* ── SPACING SEMANTIC ──────────────────────────────────────────────────── */
+
+  --spacing-component-inner-gap: var(--spacing-1);
+  --spacing-list-gap: var(--spacing-2);
+  --spacing-tab-bar-padding: var(--spacing-2);
+  --spacing-calendar-list-padding: var(--spacing-3);
+  --spacing-icon-text-gap: var(--spacing-3);
+  --spacing-page-horizontal: var(--spacing-4);
+  --spacing-card-padding: var(--spacing-4);
+  --spacing-card-gap: var(--spacing-4);
+  --spacing-user-block-padding: var(--spacing-5);
+  --spacing-nav-bar-height: 44px;
+
+  /* ── BADGE ──────────────────────────────────────────────────────────────── */
+
+  --badge-color: var(--color-red-500);     /* #E03E1A — updated from red-600 in Make */
+  --badge-size-sm: 6px;
+  --badge-size-md: 8px;
+
+  /* ════════════════════════════════════════════════════════════════════════════
+     LAYER 3: COMPONENT MAPPING
+     ════════════════════════════════════════════════════════════════════════════ */
+
+  /* ── IconButton ─────────────────────────────────────────────────────────── */
+
+  --icon-button-size-xs: 26px;
+  --icon-button-size-sm: 32px;
+  --icon-button-size-md: 40px;
+  --icon-button-padding-xs: 6px;
+  --icon-button-padding-sm: 6px;
+  --icon-button-padding-md: 8px;
+  --icon-button-icon-size-xs: 14px;
+  --icon-button-icon-size-sm: 20px;
+  --icon-button-icon-size-md: 24px;
+  --icon-button-icon-stroke-width: 2;
+  --icon-button-bg: var(--color-surface-container-high-60);
+  --icon-button-radius: var(--radius-full);
+  --icon-button-state-hover: var(--state-layer-hover);
+  --icon-button-state-pressed: var(--state-layer-pressed);
+  --icon-button-state-disabled: var(--state-layer-disabled);
+  --icon-button-icon: var(--state-icon-default);
+  --icon-button-icon-disabled: var(--state-icon-disabled);
+  --icon-button-badge: var(--badge-color);
+  --icon-button-badge-sm: var(--badge-size-sm);
+  --icon-button-badge-md: var(--badge-size-md);
+  --icon-button-border-outline: var(--color-outline);
+  --icon-button-border-white: var(--color-outline-white);
+  --icon-button-ripple: var(--color-ripple);
+
+  /* ── Chip ───────────────────────────────────────────────────────────────── */
+
+  --chip-padding-x: var(--spacing-5);
+  --chip-padding-y: var(--spacing-4);
+  --chip-radius: var(--radius-2xl);
+  --chip-bg-selected: var(--color-primary);
+  --chip-text-selected: var(--color-on-primary);
+  --chip-font-weight-selected: var(--font-weight-regular);
+  --chip-bg-unselected: var(--color-surface-container);
+  --chip-text-unselected: var(--color-on-primary-container);
+  --chip-border-unselected: var(--color-outline-grey);
+  --chip-font-weight-unselected: var(--font-weight-medium);
+  --chip-bg-disabled: var(--color-disable-container);
+  --chip-text-disabled: var(--color-on-disable-container);
+  --chip-state-hover: var(--state-layer-hover);
+  --chip-state-pressed: var(--state-layer-pressed);
+  --chip-ripple: var(--color-ripple);
+
+  /* ── Button ─────────────────────────────────────────────────────────────── */
+
+  --btn-radius-sm: var(--radius-xl);          /* 16px (sm/md/lg) */
+  --btn-radius-xl: var(--radius-lg);          /* 12px (xl) */
+  --btn-gap: var(--spacing-1);
+  --btn-font-weight: var(--font-weight-medium);
+  --btn-font-size-sm: var(--font-size-xs);    /* 12px (sm/md/lg) */
+  --btn-font-size-xl: var(--font-size-base);  /* 16px (xl) */
+  --btn-icon-sm: 16px;
+  --btn-icon-md: 12px;
+  --btn-icon-lg: 20px;
+  --btn-icon-xl: 20px;
+  --btn-px: var(--spacing-4);                 /* 16px (all sizes) */
+  --btn-py-sm: 9px;                           /* → height ~32px */
+  --btn-py-md: 12px;                          /* → height ~38px */
+  --btn-py-lg: 14px;                          /* → height ~42px */
+  --btn-py-xl: 11px;                          /* → height ~42px (font 16px) */
+  --btn-outline-bg: var(--color-surface-container-high-60);
+  --btn-outline-border: var(--color-outline);
+  --btn-outline-text: var(--color-on-surface);
+  --btn-tonal-bg: var(--color-secondary-container);
+  --btn-tonal-border: var(--color-secondary-border);
+  --btn-tonal-text: var(--color-on-secondary-container);
+  --btn-filled-bg: var(--color-primary);
+  --btn-filled-text: var(--color-on-primary);
+  --btn-disabled-text: var(--color-on-disable-container);
+  --btn-disabled-bg: var(--color-disable);
+  --btn-filled-disabled-bg: var(--color-disable-container);
+  --btn-state-hover: var(--state-layer-hover);
+  --btn-state-pressed: var(--state-layer-pressed);
+  --btn-ripple: var(--color-ripple);
+
+  /* ── List ───────────────────────────────────────────────────────────────── */
+
+  --list-padding: var(--spacing-4);
+  --list-radius: var(--radius-lg);
+  --list-gap: var(--spacing-list-gap);
+  --list-min-height: 55px;
+  --list-bg: var(--color-neutral-0);
+  --list-shadow: 0px 0px 5px 0px var(--shadow-color-neutral-xs);
+  --list-icon-color: var(--color-on-primary-container);
+  --list-title-color: var(--color-on-primary-container);
+  --list-trailing-count-color: var(--color-on-primary-container);
+  --list-trailing-text-color: var(--color-neutral-600);
+  --list-chevron-color: var(--color-on-primary-container);
+  --list-icon-size: 20px;
+  --list-chevron-size: 20px;
+  --list-title-font-size: var(--font-size-sm);
+  --list-title-font-weight: var(--font-weight-medium);
+  --list-count-font-size: var(--font-size-lg);
+  --list-count-font-weight: var(--font-weight-semibold);
+  --list-trailing-text-font-size: var(--font-size-sm);
+  --list-trailing-text-font-weight: var(--font-weight-medium);
+  --list-state-hover: var(--state-layer-hover);
+  --list-state-pressed: var(--state-layer-pressed);
+  --list-state-disabled: var(--state-layer-disabled);
+  --list-icon-disabled: var(--state-icon-disabled);
+  --list-text-disabled: var(--color-on-disable-container);
+  --list-ripple: var(--color-ripple);
+
+  /* ── Tag ────────────────────────────────────────────────────────────────── */
+
+  --tag-padding-x: var(--spacing-3);
+  --tag-padding-y: var(--spacing-1);
+  --tag-radius: var(--radius-full);
+  --tag-font-size: var(--font-size-2xs);
+  --tag-font-weight: var(--font-weight-semibold);
+  --tag-success-bg: var(--color-success-container);
+  --tag-success-text: var(--color-on-success-container);
+  --tag-error-bg: var(--color-error-container);
+  --tag-error-text: var(--color-on-error-container);
+  --tag-warning-bg: var(--color-warning-container);
+  --tag-warning-text: var(--color-on-warning-container);
+  --tag-neutral-bg: var(--color-neutral-container);
+  --tag-neutral-text: var(--color-on-neutral-container);
+  --tag-info-bg: var(--color-info-container);
+  --tag-info-text: var(--color-on-info-container);
+
+  /* ── Accordion ──────────────────────────────────────────────────────────── */
+
+  --accordion-padding-y: var(--spacing-2);
+  --accordion-gap: var(--spacing-2);
+  --accordion-icon-size: 20px;
+  --accordion-border-width: 1px;
+  --accordion-font-size: var(--font-size-xs);
+  --accordion-font-weight: var(--font-weight-medium);
+  --accordion-text-selected: var(--color-primary);
+  --accordion-icon-selected: var(--color-primary);
+  --accordion-border-selected: var(--color-primary);
+  --accordion-text-unselected: var(--color-neutral-700);
+  --accordion-icon-unselected: var(--color-neutral-700);
+  --accordion-state-hover: var(--state-layer-hover);
+  --accordion-state-pressed: var(--state-layer-pressed);
+  --accordion-state-disabled: var(--state-layer-disabled);
+  --accordion-text-disabled: var(--color-on-disable-container);
+  --accordion-icon-disabled: var(--state-icon-disabled);
+  --accordion-ripple: var(--color-ripple);
+
+  /* ── Accordion Section (collapsible region) ───────────────────────────────── */
+  --accordion-section-bg: var(--color-surface-container-high);
+  --accordion-section-shadow: 0px 4px 2px rgba(0, 0, 0, 0.25);
+  --accordion-section-padding: var(--spacing-4);
+  --accordion-section-content-padding-bottom: var(--spacing-6);
+  --accordion-section-icon-size: 24px;
+  --accordion-section-prefix-color: var(--color-neutral-700);
+  --accordion-section-prefix-size: var(--font-size-xs);
+  --accordion-section-prefix-weight: var(--font-weight-medium);
+  --accordion-section-name-color: var(--color-neutral-900);
+  --accordion-section-name-size: var(--font-size-base);
+  --accordion-section-name-weight: 700;
+
+  /* ── Badge ──────────────────────────────────────────────────────────────── */
+
+  --badge-numeric-min-width: 16px;
+  --badge-numeric-height: 20px;
+  --badge-numeric-padding-x: var(--spacing-1);
+  --badge-numeric-padding-y: 2px;
+  --badge-numeric-radius: var(--radius-full);
+  --badge-dot-size-sm: var(--badge-size-sm);
+  --badge-dot-size-md: var(--badge-size-md);
+  --badge-numeric-font-size: var(--font-size-2xs);
+  --badge-numeric-font-weight: var(--font-weight-semibold);
+  --badge-success-bg: var(--color-success-container);
+  --badge-success-text: var(--color-on-success-container);
+  --badge-neutral-bg: var(--color-neutral-container);
+  --badge-neutral-text: var(--color-neutral-700);
+  --badge-warning-dot: var(--color-warning);
+  --badge-error-dot: var(--color-error);
+
+  /* ── Avatar ─────────────────────────────────────────────────────────────── */
+
+  --avatar-size-sm: 24px;
+  --avatar-size-md: 32px;
+  --avatar-size-lg: 40px;
+  --avatar-radius: var(--radius-full);
+  --avatar-icon-size-sm: 14px;
+  --avatar-icon-size-md: 20px;
+  --avatar-icon-size-lg: 24px;
+  --avatar-bg: var(--color-surface-container);
+  --avatar-icon-color: var(--color-on-surface-dim);
+  --avatar-name-font-size: var(--font-size-sm);
+  --avatar-name-font-weight: var(--font-weight-medium);
+  --avatar-name-color: var(--color-on-surface);
+  --avatar-name-gap: var(--spacing-2);
+
+  /* ── Tab ────────────────────────────────────────────────────────────────── */
+
+  --tab-padding-x: var(--spacing-2);
+  --tab-padding-top: 10px;
+  --tab-padding-bottom: var(--spacing-3);
+  --tab-gap: 3px;
+  --tab-font-size: var(--font-size-xs);
+  --tab-font-weight: var(--font-weight-medium);
+  --tab-text-selected: var(--color-primary);
+  --tab-text-unselected: var(--color-neutral-700);
+
+  /* ── TabBar ─────────────────────────────────────────────────────────────── */
+
+  --tabbar-padding-x: var(--spacing-2);
+  --tabbar-bg: var(--color-neutral-0);
+  --tabbar-shadow: 0px 2px 2px rgba(85, 133, 108, 0.16);
+  --tabbar-indicator-height: 3px;
+  --tabbar-indicator-radius: 6px;
+  --tabbar-indicator-color: var(--color-primary);
+  --tabbar-indicator-transition: left 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                                  width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── NavigationBar ──────────────────────────────────────────────────────── */
+
+  --navbar-bg: rgba(255, 255, 255, 0.9);
+  --navbar-blur: blur(5px);
+  --navbar-shadow: 0px 0px 6px 0px rgba(111, 134, 91, 0.25);
+  --navbar-radius: 36px;
+  --navbar-padding-top: var(--spacing-1);
+  --navbar-item-size: 34px;
+  --navbar-item-opacity-inactive: 0.7;
+  --navbar-item-opacity-active: 1;
+  --navbar-label-font-size: var(--font-size-2xs);
+  --navbar-label-font-weight: var(--font-weight-semibold);
+  --navbar-label-color: var(--color-on-primary-container); /* #1f3c33 bluegreen-800 */
+  --navbar-indicator-height: 4px;
+  --navbar-indicator-width: 94px;
+  --navbar-indicator-radius: 2px;
+  --navbar-indicator-gradient-start: #ADFFB7;
+  --navbar-indicator-gradient-end: #7AD985;
+  --navbar-indicator-shadow: drop-shadow(0px 2px 2px rgba(159, 191, 153, 0.25));
+  --navbar-indicator-transition: left 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --navbar-home-indicator-container-height: 34px;
+  --navbar-home-indicator-height: 5px;
+  --navbar-home-indicator-width: 134px;
+  --navbar-home-indicator-radius: 100px;
+  --navbar-home-indicator-bottom: 8px;
+  --navbar-home-indicator-bg: var(--color-neutral-900);
+
+  /* ── Menu ───────────────────────────────────────────────────────────────── */
+
+  --menu-m-height: 55px;
+  --menu-m-padding-x: var(--spacing-5);
+  --menu-m-padding-y: var(--spacing-4);
+  --menu-m-gap: var(--spacing-2);
+  --menu-m-font-size: var(--font-size-base);
+  --menu-m-line-height: 26px;
+  --menu-s-padding-x: var(--spacing-5);
+  --menu-s-padding-y: 10px;
+  --menu-s-font-size: var(--font-size-xs);
+  --menu-bg: var(--color-surface-container-high);
+  --menu-bg-selected: var(--color-secondary-container);
+  --menu-bg-s: var(--color-surface-container-low);
+  --menu-text-color: var(--color-on-primary-container);
+  --menu-check-color: var(--color-on-primary-container);
+  --menu-check-size: 24px;
+  --menu-state-hover: var(--state-layer-hover);
+  --menu-state-pressed: var(--state-layer-pressed);
+  --menu-ripple: var(--color-ripple);
+
+  /* ── AppBar ─────────────────────────────────────────────────────────────── */
+
+  --appbar-height: 44px;
+  --appbar-padding-x: var(--spacing-4);
+  --appbar-gap: var(--spacing-4);
+  --appbar-icon-size: 28px;
+  --appbar-icon-button-radius: 7px;
+  --appbar-bg: var(--color-surface);
+  --appbar-icon-color-default: var(--color-neutral-700);
+  --appbar-icon-bg-default: transparent;
+  --appbar-icon-color-pressed: var(--color-on-secondary-container);
+  --appbar-icon-bg-pressed: var(--color-secondary-container);
+  --appbar-title-font-size: var(--font-size-base);
+  --appbar-title-font-weight: var(--font-weight-medium);
+  --appbar-title-line-height: 26px;
+  --appbar-title-color: var(--color-on-surface);
+
+  /* ── PolicyCard ─────────────────────────────────────────────────────────── */
+
+  --policy-card-bg: var(--color-surface-container-high);          /* white */
+  --policy-card-border: var(--color-outline-subtle);             /* #e1efde */
+  --policy-card-radius: var(--radius-2xl);                       /* 24px */
+  --policy-card-padding-x: var(--spacing-4);                     /* 16px */
+  --policy-card-padding-top: var(--spacing-4);                   /* 16px */
+  --policy-card-padding-bottom: var(--spacing-3);               /* 12px */
+  --policy-card-gap: var(--spacing-3);                          /* 12px */
+  --policy-card-fields-gap: var(--spacing-2);                   /* 8px */
+  --policy-card-label-color: var(--color-on-surface-muted);    /* #879195 */
+  --policy-card-label-font-size: var(--font-size-xs);          /* 12px */
+  --policy-card-product-color: var(--color-on-surface-heading);/* #37474f */
+  --policy-card-product-font-size: var(--font-size-base);      /* 16px */
+  --policy-card-value-color: var(--color-on-surface);         /* #2e5245 */
+  --policy-card-value-font-size: var(--font-size-xs);         /* 12px */
+  --policy-card-more-color: var(--color-on-surface-heading);
+  --policy-card-footer-bg: var(--color-surface-container-low); /* #f8f8f8 */
+  --policy-card-footer-padding: var(--spacing-3);             /* 12px */
+  --policy-card-footer-gap: var(--spacing-2);                /* 8px */
+  --policy-card-footer-label-color: var(--color-on-surface-dim);  /* #5f6d6a */
+  --policy-card-footer-value-color: var(--color-neutral-800);     /* #364540 */
+  --policy-card-footer-font-size: var(--font-size-xs);
+
+  /* ── NavigationButton ───────────────────────────────────────────────────── */
+
+  --nav-button-title-color: var(--color-on-primary-container);   /* #1f3c33 */
+  --nav-button-amount-color: var(--color-on-surface);            /* #2e5245 */
+  --nav-button-amount-font-size: var(--font-size-xl);            /* 20px */
+  --nav-button-icon-color: var(--color-on-surface);
+  /* stat (filled / 24) */
+  --nav-button-stat-bg: var(--color-surface-container);          /* #fafafa */
+  --nav-button-stat-border: var(--color-outline-grey);           /* #e7e7e7 */
+  --nav-button-stat-radius: var(--radius-2xl);                   /* 24px */
+  --nav-button-stat-height: 70px;
+  --nav-button-stat-padding-y: var(--spacing-3);                 /* 12px */
+  --nav-button-stat-padding-x: var(--spacing-5);                 /* 20px */
+  --nav-button-stat-gap: 7px;
+  --nav-button-stat-title-color: var(--color-on-primary-container);
+  --nav-button-stat-title-font-size: var(--font-size-xs);        /* 12px */
+  /* pill (outline / 40) */
+  --nav-button-pill-border-color: var(--color-bluegreen-300);    /* #50b45c */
+  --nav-button-pill-border-width: 3px;
+  --nav-button-pill-radius: 40px;
+  --nav-button-pill-height: 64px;
+  --nav-button-pill-padding-x: var(--spacing-5);                 /* 20px */
+  --nav-button-pill-title-color: var(--color-on-surface);        /* #2e5245 */
+  --nav-button-pill-title-font-size: var(--font-size-sm);        /* 14px */
+  --nav-button-pill-shadow: 0px 2px 4px 0px rgba(114, 161, 106, 0.25);
+
+  /* ── SectionHeader ──────────────────────────────────────────────────────── */
+
+  --section-header-height: 32px;
+  --section-header-padding-left: 6px;
+  --section-header-title-color: var(--color-on-surface-section); /* #375f47 */
+  --section-header-title-font-size: var(--font-size-sm);         /* 14px */
+  --section-header-action-color: var(--color-green-600);         /* #218b3e */
+  --section-header-action-font-size: var(--font-size-xs);        /* 12px */
+
+  /* ── ServiceTile ────────────────────────────────────────────────────────── */
+
+  --service-tile-bg: var(--color-surface-container);            /* #fafafa */
+  --service-tile-border: var(--color-outline-grey);             /* #e7e7e7 */
+  --service-tile-radius: var(--radius-2xl);                     /* 24px */
+  --service-tile-height: 88px;
+  --service-tile-gap: 6px;
+  --service-tile-padding-y: var(--spacing-3);                   /* 12px */
+  --service-tile-padding-x: var(--spacing-2);                   /* 8px */
+  --service-tile-icon-size: 32px;
+  --service-tile-label-color: var(--color-on-primary-container); /* #1f3c33 — per Figma Service Button */
+  --service-tile-label-font-size: 11px;
+  /* Horizontal style (icon left of label; used for single-item group) */
+  --service-tile-horizontal-height: 64px;
+  --service-tile-horizontal-gap: var(--spacing-3);             /* 12px */
+  --service-tile-horizontal-padding-y: var(--spacing-4);       /* 16px */
+  /* Interactive state layers + ripple */
+  --service-tile-state-hover: var(--state-layer-hover);
+  --service-tile-state-pressed: var(--state-layer-pressed);
+  --service-tile-ripple: var(--color-ripple);
+  /* Group container */
+  --service-tile-group-gap: var(--spacing-2);                  /* 8px */
+
+  /* ── ProgressPagination ─────────────────────────────────────────────────── */
+
+  --progress-pagination-container-width: 44px;
+  --progress-pagination-container-height: 14px;                 /* 4px padding + 6px segment */
+  --progress-pagination-container-padding: var(--spacing-1);    /* 4px */
+  --progress-pagination-container-radius: var(--radius-2xl);    /* 24px */
+  --progress-pagination-container-border: 0.5px solid var(--color-outline-grey); /* #e7e7e7 */
+  --progress-pagination-container-bg: var(--color-surface);
+  --progress-pagination-segment-width: 19px;                    /* fixed */
+  --progress-pagination-segment-height: var(--badge-size-sm);   /* 6px */
+  --progress-pagination-segment-radius: 6px;
+  --progress-pagination-segment-bg: var(--color-primary);       /* #298c7f */
+  --progress-pagination-transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Carousel ───────────────────────────────────────────────────────────── */
+
+  --carousel-banner-width: 343px;
+  --carousel-banner-height: 80px;
+  --carousel-banner-radius: var(--radius-lg);                   /* 12px */
+  --carousel-banner-gap: var(--spacing-2);                      /* 8px */
+  --carousel-banner-border: 0.5px solid var(--color-neutral-200); /* #dadcdc */
+  --carousel-banner-bg: var(--color-surface);
+  --carousel-indicator-margin-top: var(--spacing-2);            /* 8px */
+}
