@@ -11,6 +11,7 @@ import {
   SectionHeaderComponent,
   ServiceTileComponent,
   NavigationBarComponent,
+  CarouselComponent,
   ICON_MAP,
   homeIconDefault,
   homeIconActive,
@@ -45,6 +46,7 @@ interface DayCell {
     SectionHeaderComponent,
     ServiceTileComponent,
     NavigationBarComponent,
+    CarouselComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './trang-chu.component.html',
@@ -87,6 +89,13 @@ export class TrangChuComponent {
     { n: '05', status: 'disabled' },
     { n: '06', status: 'disabled' },
     { n: '07' },
+  ];
+
+  /** Banner carousel slides (最新消息). */
+  protected readonly banners = [
+    this.asset + 'banner-promo.png',
+    this.asset + 'banner-2.svg',
+    this.asset + 'banner-3.svg',
   ];
 
   protected toggleBalance(): void {

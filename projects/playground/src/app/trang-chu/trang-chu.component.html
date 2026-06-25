@@ -116,12 +116,7 @@
         <!-- Ads / news -->
         <div class="tc-block">
           <lib-section-header title="最新消息" actionLabel="More"></lib-section-header>
-          <div class="tc-banner">
-            <img class="tc-banner__img" [src]="asset + 'banner-promo.png'" alt="Trân quý từng khoảnh khắc" />
-          </div>
-          <div class="tc-banner__bar">
-            <span class="tc-banner__progress"></span>
-          </div>
+          <lib-carousel [items]="banners" aria-label="最新消息" class="tc-carousel"></lib-carousel>
         </div>
       </section>
     </div>

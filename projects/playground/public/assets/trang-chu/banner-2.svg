@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="343" height="80" viewBox="0 0 343 80" fill="none">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="343" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2E7D6B"/>
+      <stop offset="1" stop-color="#1F3C33"/>
+    </linearGradient>
+  </defs>
+  <rect width="343" height="80" fill="url(#g2)"/>
+  <circle cx="300" cy="40" r="48" fill="#C3E874" opacity="0.16"/>
+  <circle cx="306" cy="46" r="26" fill="#C3E874" opacity="0.24"/>
+  <text x="20" y="35" font-family="'Be Vietnam Pro', Roboto, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Bảo hiểm xe máy</text>
+  <text x="20" y="57" font-family="'Be Vietnam Pro', Roboto, sans-serif" font-size="13" font-weight="600" fill="#C3E874">Ưu đãi đến 20% hôm nay</text>
+</svg>

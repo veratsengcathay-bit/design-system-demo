@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="343" height="80" viewBox="0 0 343 80" fill="none">
+  <defs>
+    <linearGradient id="g3" x1="0" y1="0" x2="343" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#EDF0C2"/>
+      <stop offset="1" stop-color="#C0FFC3"/>
+    </linearGradient>
+  </defs>
+  <rect width="343" height="80" fill="url(#g3)"/>
+  <circle cx="298" cy="40" r="34" fill="#298C7F" opacity="0.12"/>
+  <circle cx="312" cy="58" r="18" fill="#298C7F" opacity="0.10"/>
+  <text x="20" y="35" font-family="'Be Vietnam Pro', Roboto, sans-serif" font-size="16" font-weight="700" fill="#1F3C33">Tải ứng dụng SAG</text>
+  <text x="20" y="57" font-family="'Be Vietnam Pro', Roboto, sans-serif" font-size="13" font-weight="600" fill="#298C7F">Nhận quà liền tay</text>
+</svg>
