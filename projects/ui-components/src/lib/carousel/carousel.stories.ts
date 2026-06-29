@@ -22,7 +22,9 @@ const meta: Meta<CarouselComponent> = {
   component: CarouselComponent,
   tags: ['autodocs'],
   argTypes: {
-    items:     { control: 'object' },
+    // items 是內嵌 SVG data-URI 陣列,值極長會塞爆 Controls 面板;
+    // 從 Controls/autodocs 隱藏,值仍由 args 提供,預覽照常。
+    items:     { table: { disable: true } },
     itemClick: { action: 'itemClick' },
   },
   args: { items: sampleItems },

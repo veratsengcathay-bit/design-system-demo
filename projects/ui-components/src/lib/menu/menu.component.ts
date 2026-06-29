@@ -25,7 +25,6 @@ interface RippleData { id: number; x: number; y: number; size: number; }
       [attr.data-menu-selected]="selected && size === 'M' ? 'true' : 'false'"
       [attr.data-menu-size]="size"
       [disabled]="disabled || null"
-      [style.width]="size === 'S' ? '120px' : '100%'"
       [style.height]="size === 'S' ? 'auto' : 'var(--menu-m-height)'"
       [style.padding]="size === 'S'
         ? 'var(--menu-s-padding-y) var(--menu-s-padding-x)'
@@ -34,6 +33,7 @@ interface RippleData { id: number; x: number; y: number; size: number; }
       [style.font-size]="size === 'S' ? 'var(--menu-s-font-size)' : 'var(--menu-m-font-size)'"
       [style.line-height]="size === 'S' ? 'normal' : 'var(--menu-m-line-height)'"
       style="
+        width: 100%;
         position: relative;
         display: flex;
         align-items: center;
@@ -72,7 +72,7 @@ interface RippleData { id: number; x: number; y: number; size: number; }
 
       <!-- Check icon — M size, selected state only -->
       @if (size === 'M' && selected) {
-        <span class="menu-item__check" style="position:relative;display:flex;align-items:center;flex-shrink:0;">
+        <span class="menu-item__check" style="position:relative;display:flex;align-items:center;flex-shrink:0;top:3px;">
           <lucide-icon [img]="checkIcon" [size]="24" [strokeWidth]="2" color="currentColor"></lucide-icon>
         </span>
       }
@@ -120,3 +120,18 @@ export class MenuItemComponent {
   protected onMouseUp(): void { if (this.isInteractive) this.interaction.set('default'); }
   protected onClick(): void { if (!this.disabled) this.clicked.emit(); }
 }
+
+/**
+ * S 按鈕組合情境 — menu_group。
+ * 將多個 size="S" 的 lib-menu-item 包進白底圓角外框,項目間以 1px 白縫分隔。
+ * Figma: SAG Library node 601:612。
+ */
+@Component({
+  selector: 'lib-menu-group',
+  standalone: true,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `<div class="menu-group"><ng-content></ng-content></div>`,
+  styles: [`lib-menu-group { display: inline-block; }`],
+})
+export class MenuGroupComponent {}

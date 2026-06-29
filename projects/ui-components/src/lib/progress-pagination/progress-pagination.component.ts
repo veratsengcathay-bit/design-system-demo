@@ -38,6 +38,12 @@ export class ProgressPaginationComponent {
   @Input() currentPage = 1;
   /** Total number of pages. */
   @Input() totalPages = 1;
+  /**
+   * Optional continuous progress ratio (0–1). When set (e.g. driven by a live
+   * scroll/drag position), the segment slides proportionally instead of
+   * snapping per page. Falls back to the discrete `currentPage` calc when null.
+   */
+  @Input() progress: number | null = null;
 
   /** Token measurements (kept in sync with --progress-pagination-* tokens). */
   private readonly containerWidth = 44;
@@ -47,7 +53,11 @@ export class ProgressPaginationComponent {
   get translateX(): number {
     const available = this.containerWidth - this.padding * 2 - this.segmentWidth; // 17px
     const ratio =
-      this.totalPages > 1 ? (this.currentPage - 1) / (this.totalPages - 1) : 0;
+      this.progress !== null
+        ? this.progress
+        : this.totalPages > 1
+          ? (this.currentPage - 1) / (this.totalPages - 1)
+          : 0;
     const clamped = Math.min(1, Math.max(0, ratio));
     return clamped * available;
   }

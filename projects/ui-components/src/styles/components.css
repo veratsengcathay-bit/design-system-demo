@@ -130,8 +130,8 @@
 .chip[data-chip-selected="true"] .chip__border,
 .chip[data-chip-state="disabled"] .chip__border { display: none; }
 .chip__label {
-  font-family: var(--font-family-roboto);
-  font-size: var(--font-size-sm);
+  font-family: var(--type-roboto-body-sm-family);
+  font-size: var(--type-roboto-body-sm-size);
   color: var(--chip-text-unselected);
   font-weight: var(--chip-font-weight-unselected);
   white-space: nowrap;
@@ -252,6 +252,34 @@
   transform-origin: center center;
   transform: scale(0);
   animation: accordion-ripple 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   AccordionTabs — container that owns the header row layout + content panel.
+   Layout context (row / fill / header padding) lives here, NOT on lib-accordion.
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.accordion-tabs__headers {
+  display: flex;
+  gap: 0;
+  border-bottom: var(--accordion-border-width) solid var(--accordion-tabs-border);
+}
+/* Each header gets breathing room (the bare lib-accordion has no horizontal padding) */
+.accordion-tabs__headers > lib-accordion .accordion {
+  padding-left: var(--accordion-tabs-header-padding-x);
+  padding-right: var(--accordion-tabs-header-padding-x);
+}
+/* fill mode → headers share the row equally and stretch to fill */
+.accordion-tabs[data-accordion-tabs-fill="true"] .accordion-tabs__headers > lib-accordion {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.accordion-tabs[data-accordion-tabs-fill="true"] .accordion-tabs__headers > lib-accordion .accordion {
+  width: 100%;
+  justify-content: center;
+}
+.accordion-tabs__panel {
+  padding: var(--accordion-tabs-panel-padding);
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -551,6 +579,18 @@
   transform-origin: center center;
   transform: scale(0);
   animation: menu-ripple 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* menu_group — S 按鈕組合情境:白底圓角外框,項目間 1px 白縫作分隔 */
+.menu-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--menu-group-gap);
+  width: var(--menu-group-width);
+  background-color: var(--menu-group-bg);
+  border: 1px solid var(--menu-group-border-color);
+  border-radius: var(--menu-group-radius);
+  overflow: hidden;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -973,19 +1013,26 @@
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   outline: none;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.carousel__slider.is-dragging {
+  cursor: grabbing;   /* snap is toggled in JS during drag/settle */
 }
 .carousel__slider::-webkit-scrollbar { display: none; }
 .carousel__banner {
   position: relative;
   flex-shrink: 0;
   box-sizing: border-box;
-  width: var(--carousel-banner-width);
+  width: 100%;                 /* fill the slider viewport — never overflow/crop */
   height: var(--carousel-banner-height);
   border-radius: var(--carousel-banner-radius);
   border: var(--carousel-banner-border);
   background-color: var(--carousel-banner-bg);
   overflow: hidden;
   scroll-snap-align: start;
+  scroll-snap-stop: always;    /* one banner per swipe — no skipping/half-stops */
 }
 .carousel__banner img {
   width: 100%;
@@ -997,4 +1044,50 @@
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   Carousel Previewer (Large) — full-size 9:16 image viewer with icon-button nav
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.carousel-previewer {
+  position: relative;
+  width: var(--carousel-previewer-width);
+  aspect-ratio: var(--carousel-previewer-aspect-ratio);   /* 9:16 → height ~610px */
+  max-width: 100%;
+  border-radius: var(--carousel-banner-radius);           /* 12px — shared with banner */
+  overflow: hidden;
+}
+.carousel-previewer__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.carousel-previewer__controls {
+  position: absolute;
+  inset: auto 0 0 0;                                       /* pinned to bottom edge */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--carousel-previewer-controller-gap);          /* 8px */
+  padding: var(--carousel-previewer-controller-padding);  /* 20px */
+}
+
+/* Full-screen overlay (code-side expand mode) — scrim + centered previewer */
+.carousel-previewer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--carousel-previewer-overlay-z);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--carousel-previewer-overlay-padding);
+  background-color: var(--carousel-previewer-overlay-bg);
+  outline: none;
+}
+.carousel-previewer__close {
+  position: absolute;
+  top: var(--carousel-previewer-overlay-padding);
+  right: var(--carousel-previewer-overlay-padding);
 }

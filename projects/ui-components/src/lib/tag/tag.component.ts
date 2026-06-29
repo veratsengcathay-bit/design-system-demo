@@ -22,7 +22,7 @@ export type TagVariant = 'success' | 'error' | 'warning' | 'neutral' | 'info';
       <span
         class="tag__label"
         style="
-          font-family: var(--font-family-roboto);
+          font-family: var(--type-bvp-label-sm-family);
           font-size: var(--tag-font-size);
           font-weight: var(--tag-font-weight);
           line-height: normal;

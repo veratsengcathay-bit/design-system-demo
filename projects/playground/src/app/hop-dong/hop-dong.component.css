@@ -86,9 +86,9 @@
   color: var(--color-on-surface-heading);
 }
 .hd-subfilter__label {
-  font-family: var(--font-family-be-vietnam-pro);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-sm);
+  font-family: var(--type-bvp-body-sm-family);
+  font-weight: var(--type-bvp-body-sm-weight);
+  font-size: var(--type-bvp-body-sm-size);
   color: var(--color-on-surface-heading);
 }
 

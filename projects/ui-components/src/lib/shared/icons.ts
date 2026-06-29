@@ -13,6 +13,7 @@ import {
   Search,
   User,
   EllipsisVertical,
+  X,
 } from 'lucide-angular';
 
 /** All icons used across the design system */
@@ -27,6 +28,7 @@ export const DS_ICONS = {
   Search,
   User,
   EllipsisVertical,
+  X,
 } as const;
 
 /**
@@ -44,6 +46,7 @@ export const ICON_MAP = {
   'search':        Search,
   'user':          User,
   'ellipsis-vertical': EllipsisVertical,
+  'x':             X,
 } as const;
 
 export type IconType = keyof typeof ICON_MAP;

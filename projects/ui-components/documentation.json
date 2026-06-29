@@ -1,12 +1,274 @@
 {
     "pipes": [],
-    "interfaces": [],
+    "interfaces": [
+        {
+            "name": "DemoTab",
+            "id": "interface-DemoTab-bf8296dcad65562e60083109b39a414b6a512af30204bcf16f07f06cb0318d235c55ba2715930c940b738700265829ccbda74ff80cf052e6b2a217d2f9e915ce",
+            "file": "projects/ui-components/src/lib/accordion/accordion.stories.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, signal } from '@angular/core';\nimport type { Meta, StoryObj } from '@storybook/angular';\nimport { moduleMetadata } from '@storybook/angular';\nimport { AccordionComponent } from './accordion.component';\n\nconst meta: Meta<AccordionComponent> = {\n  title: 'Components/Accordion',\n  component: AccordionComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    label:    { control: 'text'    },\n    selected: { control: 'boolean' },\n    disabled: { control: 'boolean' },\n    clicked:  { action: 'clicked'  },\n  },\n  args: { label: '全部', selected: false, disabled: false },\n};\n\nexport default meta;\ntype Story = StoryObj<AccordionComponent>;\n\nexport const Unselected: Story = { args: { label: '全部',   selected: false } };\nexport const Selected:   Story = { args: { label: '進行中', selected: true  } };\nexport const Disabled:   Story = { args: { label: '停用',   disabled: true  } };\n\n/**\n * Static tab row — shows selected / unselected / disabled side by side\n * (visual reference only; selection is fixed).\n */\nexport const TabGroup: Story = {\n  render: () => ({\n    template: `\n      <div style=\"display:flex;gap:0;border-bottom:1px solid var(--color-outline-grey);padding:0 16px;background:#fff;\">\n        <lib-accordion label=\"全部\"   [selected]=\"true\"></lib-accordion>\n        <lib-accordion label=\"進行中\" [selected]=\"false\"></lib-accordion>\n        <lib-accordion label=\"已完成\" [selected]=\"false\"></lib-accordion>\n        <lib-accordion label=\"已取消\" [disabled]=\"true\"></lib-accordion>\n      </div>\n    `,\n    moduleMetadata: { imports: [AccordionComponent] },\n  }),\n};\n\n/* ────────────────────────────────────────────────────────────────────────────\n   Interactive Tab Bar — mirrors the Figma Make \"Accordion → Interactive Tab Bar\"\n   example: Accordion items act as clickable tabs; a content panel below updates\n   to the active tab. Demonstrates real selection + ripple interaction.\n   ──────────────────────────────────────────────────────────────────────────── */\n\ninterface DemoTab { id: string; label: string; content: string; }\n\n@Component({\n  selector: 'sb-accordion-tabbar-demo',\n  standalone: true,\n  imports: [AccordionComponent],\n  template: `\n    <div style=\"width:375px;max-width:100%;background:#fff;border:1px solid var(--color-outline-grey);border-radius:var(--radius-md);overflow:hidden;\">\n      <!-- Tab headers -->\n      <div style=\"display:flex;gap:0;border-bottom:1px solid var(--color-outline-grey);padding:0 16px;\">\n        @for (t of tabs; track t.id) {\n          <lib-accordion\n            [label]=\"t.label\"\n            [selected]=\"active() === t.id\"\n            (clicked)=\"active.set(t.id)\"\n          ></lib-accordion>\n        }\n      </div>\n\n      <!-- Content panel — switches with the active tab -->\n      <div style=\"padding:16px;background:var(--color-surface-container);min-height:96px;\">\n        <p style=\"margin:0;font-family:var(--font-family-roboto);font-size:14px;line-height:1.5;color:var(--color-on-surface);\">\n          {{ activeContent() }}\n        </p>\n      </div>\n    </div>\n  `,\n})\nclass AccordionTabBarDemo {\n  readonly tabs: DemoTab[] = [\n    { id: 'products', label: '產品', content: '產品內容:壽險、醫療險、意外險等商品列表與保障說明。' },\n    { id: 'services', label: '服務', content: '服務內容:理賠申請、保單批改、繳費與帳戶管理。' },\n    { id: 'about',    label: '關於', content: '關於我們:公司簡介、服務據點與經營理念。' },\n    { id: 'contact',  label: '聯絡', content: '聯絡我們:客服專線 0800-000-000 與線上表單。' },\n  ];\n  readonly active = signal('products');\n  readonly activeContent = () =>\n    this.tabs.find(t => t.id === this.active())?.content ?? '';\n}\n\nexport const InteractiveTabBar: Story = {\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Accordion 當作 tab header,點擊切換選取狀態(含 ripple),下方內容面板隨之更新。對應 Figma Make 的 Accordion → Interactive Tab Bar 範例。',\n      },\n    },\n  },\n  decorators: [moduleMetadata({ imports: [AccordionTabBarDemo] })],\n  render: () => ({\n    template: `<sb-accordion-tabbar-demo></sb-accordion-tabbar-demo>`,\n  }),\n};\n",
+            "properties": [
+                {
+                    "name": "content",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 50
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 50
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 50
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        }
+    ],
     "injectables": [],
     "guards": [],
     "interceptors": [],
     "classes": [],
     "directives": [],
-    "components": [],
+    "components": [
+        {
+            "name": "AccordionTabBarDemo",
+            "id": "component-AccordionTabBarDemo-bf8296dcad65562e60083109b39a414b6a512af30204bcf16f07f06cb0318d235c55ba2715930c940b738700265829ccbda74ff80cf052e6b2a217d2f9e915ce",
+            "file": "projects/ui-components/src/lib/accordion/accordion.stories.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "sb-accordion-tabbar-demo",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div style=\"width:375px;max-width:100%;background:#fff;border:1px solid var(--color-outline-grey);border-radius:var(--radius-md);overflow:hidden;\">\n  <!-- Tab headers -->\n  <div style=\"display:flex;gap:0;border-bottom:1px solid var(--color-outline-grey);padding:0 16px;\">\n    @for (t of tabs; track t.id) {\n      <lib-accordion\n        [label]=\"t.label\"\n        [selected]=\"active() === t.id\"\n        (clicked)=\"active.set(t.id)\"\n      ></lib-accordion>\n    }\n  </div>\n\n  <!-- Content panel — switches with the active tab -->\n  <div style=\"padding:16px;background:var(--color-surface-container);min-height:96px;\">\n    <p style=\"margin:0;font-family:var(--font-family-roboto);font-size:14px;line-height:1.5;color:var(--color-on-surface);\">\n      {{ activeContent() }}\n    </p>\n  </div>\n</div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "active",
+                    "defaultValue": "signal('products')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 85,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "activeContent",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 86,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "tabs",
+                    "defaultValue": "[\n    { id: 'products', label: '產品', content: '產品內容:壽險、醫療險、意外險等商品列表與保障說明。' },\n    { id: 'services', label: '服務', content: '服務內容:理賠申請、保單批改、繳費與帳戶管理。' },\n    { id: 'about',    label: '關於', content: '關於我們:公司簡介、服務據點與經營理念。' },\n    { id: 'contact',  label: '聯絡', content: '聯絡我們:客服專線 0800-000-000 與線上表單。' },\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "DemoTab[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 79,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "AccordionComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, signal } from '@angular/core';\nimport type { Meta, StoryObj } from '@storybook/angular';\nimport { moduleMetadata } from '@storybook/angular';\nimport { AccordionComponent } from './accordion.component';\n\nconst meta: Meta<AccordionComponent> = {\n  title: 'Components/Accordion',\n  component: AccordionComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    label:    { control: 'text'    },\n    selected: { control: 'boolean' },\n    disabled: { control: 'boolean' },\n    clicked:  { action: 'clicked'  },\n  },\n  args: { label: '全部', selected: false, disabled: false },\n};\n\nexport default meta;\ntype Story = StoryObj<AccordionComponent>;\n\nexport const Unselected: Story = { args: { label: '全部',   selected: false } };\nexport const Selected:   Story = { args: { label: '進行中', selected: true  } };\nexport const Disabled:   Story = { args: { label: '停用',   disabled: true  } };\n\n/**\n * Static tab row — shows selected / unselected / disabled side by side\n * (visual reference only; selection is fixed).\n */\nexport const TabGroup: Story = {\n  render: () => ({\n    template: `\n      <div style=\"display:flex;gap:0;border-bottom:1px solid var(--color-outline-grey);padding:0 16px;background:#fff;\">\n        <lib-accordion label=\"全部\"   [selected]=\"true\"></lib-accordion>\n        <lib-accordion label=\"進行中\" [selected]=\"false\"></lib-accordion>\n        <lib-accordion label=\"已完成\" [selected]=\"false\"></lib-accordion>\n        <lib-accordion label=\"已取消\" [disabled]=\"true\"></lib-accordion>\n      </div>\n    `,\n    moduleMetadata: { imports: [AccordionComponent] },\n  }),\n};\n\n/* ────────────────────────────────────────────────────────────────────────────\n   Interactive Tab Bar — mirrors the Figma Make \"Accordion → Interactive Tab Bar\"\n   example: Accordion items act as clickable tabs; a content panel below updates\n   to the active tab. Demonstrates real selection + ripple interaction.\n   ──────────────────────────────────────────────────────────────────────────── */\n\ninterface DemoTab { id: string; label: string; content: string; }\n\n@Component({\n  selector: 'sb-accordion-tabbar-demo',\n  standalone: true,\n  imports: [AccordionComponent],\n  template: `\n    <div style=\"width:375px;max-width:100%;background:#fff;border:1px solid var(--color-outline-grey);border-radius:var(--radius-md);overflow:hidden;\">\n      <!-- Tab headers -->\n      <div style=\"display:flex;gap:0;border-bottom:1px solid var(--color-outline-grey);padding:0 16px;\">\n        @for (t of tabs; track t.id) {\n          <lib-accordion\n            [label]=\"t.label\"\n            [selected]=\"active() === t.id\"\n            (clicked)=\"active.set(t.id)\"\n          ></lib-accordion>\n        }\n      </div>\n\n      <!-- Content panel — switches with the active tab -->\n      <div style=\"padding:16px;background:var(--color-surface-container);min-height:96px;\">\n        <p style=\"margin:0;font-family:var(--font-family-roboto);font-size:14px;line-height:1.5;color:var(--color-on-surface);\">\n          {{ activeContent() }}\n        </p>\n      </div>\n    </div>\n  `,\n})\nclass AccordionTabBarDemo {\n  readonly tabs: DemoTab[] = [\n    { id: 'products', label: '產品', content: '產品內容:壽險、醫療險、意外險等商品列表與保障說明。' },\n    { id: 'services', label: '服務', content: '服務內容:理賠申請、保單批改、繳費與帳戶管理。' },\n    { id: 'about',    label: '關於', content: '關於我們:公司簡介、服務據點與經營理念。' },\n    { id: 'contact',  label: '聯絡', content: '聯絡我們:客服專線 0800-000-000 與線上表單。' },\n  ];\n  readonly active = signal('products');\n  readonly activeContent = () =>\n    this.tabs.find(t => t.id === this.active())?.content ?? '';\n}\n\nexport const InteractiveTabBar: Story = {\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Accordion 當作 tab header,點擊切換選取狀態(含 ripple),下方內容面板隨之更新。對應 Figma Make 的 Accordion → Interactive Tab Bar 範例。',\n      },\n    },\n  },\n  decorators: [moduleMetadata({ imports: [AccordionTabBarDemo] })],\n  render: () => ({\n    template: `<sb-accordion-tabbar-demo></sb-accordion-tabbar-demo>`,\n  }),\n};\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "CarouselPreviewerExpandDemo",
+            "id": "component-CarouselPreviewerExpandDemo-51a0138b4c70a33274bf01cd5326bebae3a03bc246265ecc9dbc4a333e580acdc83046d37a68749acf612e6f0168021349c6d4327d0bbec6cb10b6843b7151e4",
+            "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-carousel-previewer-expand-demo",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div style=\"display:flex;flex-direction:column;gap:20px;\">\n  <lib-carousel [items]=\"banners\" (itemClick)=\"open($event)\"></lib-carousel>\n\n  @if (expanded()) {\n    <lib-carousel-previewer\n      [items]=\"previews\"\n      [initialIndex]=\"index()\"\n      [overlay]=\"!inline\"\n      (closed)=\"expanded.set(false)\"\n    ></lib-carousel-previewer>\n  }\n</div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "inline",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 88,
+                    "type": "boolean",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "banners",
+                    "defaultValue": "[\n    banner('Banner 1', COLORS[0]),\n    banner('Banner 2', COLORS[1]),\n    banner('Banner 3', COLORS[2]),\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 89
+                },
+                {
+                    "name": "expanded",
+                    "defaultValue": "signal(false)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 95
+                },
+                {
+                    "name": "index",
+                    "defaultValue": "signal(0)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 96
+                },
+                {
+                    "name": "previews",
+                    "defaultValue": "previewItems",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 94
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "open",
+                    "args": [
+                        {
+                            "name": "i",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 98,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "i",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CarouselComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "CarouselPreviewerComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { moduleMetadata } from '@storybook/angular';\nimport { Component, Input, signal } from '@angular/core';\nimport { CarouselPreviewerComponent } from './carousel-previewer.component';\nimport { CarouselComponent } from './carousel.component';\n\n/** Inline portrait SVG (9:16, 343×610) so stories render without external assets. */\nconst preview = (label: string, color: string): string =>\n  'data:image/svg+xml;utf8,' +\n  encodeURIComponent(\n    `<svg xmlns='http://www.w3.org/2000/svg' width='343' height='610'>` +\n      `<rect width='343' height='610' fill='${color}'/>` +\n      `<text x='171' y='305' font-family='sans-serif' font-size='28' fill='white' text-anchor='middle'>${label}</text>` +\n      `</svg>`,\n  );\n\n/** Small landscape banner (343×80) for the carousel half of the expand demo. */\nconst banner = (label: string, color: string): string =>\n  'data:image/svg+xml;utf8,' +\n  encodeURIComponent(\n    `<svg xmlns='http://www.w3.org/2000/svg' width='343' height='80'>` +\n      `<rect width='343' height='80' fill='${color}'/>` +\n      `<text x='171' y='46' font-family='sans-serif' font-size='18' fill='white' text-anchor='middle'>${label}</text>` +\n      `</svg>`,\n  );\n\nconst COLORS = ['#298c7f', '#3a876b', '#50b45c'];\n\nconst previewItems = [\n  preview('Preview 1', COLORS[0]),\n  preview('Preview 2', COLORS[1]),\n  preview('Preview 3', COLORS[2]),\n];\n\nconst meta: Meta<CarouselPreviewerComponent> = {\n  title: 'Components/Carousel Previewer',\n  component: CarouselPreviewerComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    // items 是內嵌 SVG data-URI 陣列,值極長會塞爆 Controls 面板;隱藏但仍由 args 提供。\n    items: { table: { disable: true } },\n    indexChange: { action: 'indexChange' },\n  },\n  args: { items: previewItems, initialIndex: 0 },\n};\n\nexport default meta;\ntype Story = StoryObj<CarouselPreviewerComponent>;\n\n/** Large 9:16 previewer. Use the bottom-right icon buttons to switch images. */\nexport const Default: Story = {};\n\n/** Single image — navigation controls are hidden when there's nothing to switch to. */\nexport const SingleImage: Story = {\n  args: { items: [preview('Single Preview', COLORS[0])] },\n};\n\n/** Full-screen overlay (scrim + close button). Dismiss via close / backdrop / Esc. */\nexport const Overlay: Story = {\n  args: { overlay: true },\n};\n\n/* ── Click-to-expand demo ──────────────────────────────────────────────────\n   Mirrors the Figma Make showcase: clicking a small Carousel banner opens the\n   large CarouselPreviewer at the clicked index (\"expand\" into preview mode).\n   `inline` renders the previewer below the carousel (Make behaviour); the\n   default shows it as a full-screen overlay (code-side expand mode). */\n@Component({\n  selector: 'lib-carousel-previewer-expand-demo',\n  standalone: true,\n  imports: [CarouselComponent, CarouselPreviewerComponent],\n  template: `\n    <div style=\"display:flex;flex-direction:column;gap:20px;\">\n      <lib-carousel [items]=\"banners\" (itemClick)=\"open($event)\"></lib-carousel>\n\n      @if (expanded()) {\n        <lib-carousel-previewer\n          [items]=\"previews\"\n          [initialIndex]=\"index()\"\n          [overlay]=\"!inline\"\n          (closed)=\"expanded.set(false)\"\n        ></lib-carousel-previewer>\n      }\n    </div>\n  `,\n})\nclass CarouselPreviewerExpandDemo {\n  @Input() inline = false;\n  banners = [\n    banner('Banner 1', COLORS[0]),\n    banner('Banner 2', COLORS[1]),\n    banner('Banner 3', COLORS[2]),\n  ];\n  previews = previewItems;\n  expanded = signal(false);\n  index = signal(0);\n\n  open(i: number): void {\n    this.index.set(i);\n    this.expanded.set(true);\n  }\n}\n\n/** Tap/click a banner to expand it into a full-screen previewer at that index. */\nexport const ExpandFromCarousel: StoryObj = {\n  decorators: [moduleMetadata({ imports: [CarouselPreviewerExpandDemo] })],\n  render: () => ({ template: `<lib-carousel-previewer-expand-demo></lib-carousel-previewer-expand-demo>` }),\n};\n\n/** Same expand wiring, but the previewer appears inline below (Figma Make behaviour). */\nexport const ExpandInline: StoryObj = {\n  decorators: [moduleMetadata({ imports: [CarouselPreviewerExpandDemo] })],\n  render: () => ({\n    props: { inline: true },\n    template: `<lib-carousel-previewer-expand-demo [inline]=\"inline\"></lib-carousel-previewer-expand-demo>`,\n  }),\n};\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        }
+    ],
     "modules": [],
     "miscellaneous": {
         "variables": [
@@ -94,16 +356,6 @@
                 "name": "AllVariants",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ui-components/src/lib/badge/badge.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display:flex;align-items:center;gap:16px;padding:16px;background:var(--color-surface);flex-wrap:wrap;\">\n        <lib-badge type=\"numeric\" [count]=\"5\"   numericVariant=\"success\"></lib-badge>\n        <lib-badge type=\"numeric\" [count]=\"12\"  numericVariant=\"neutral\"></lib-badge>\n        <lib-badge type=\"numeric\" [count]=\"100\" numericVariant=\"success\"></lib-badge>\n        <lib-badge type=\"dot\" dotVariant=\"warning\" dotSize=\"md\"></lib-badge>\n        <lib-badge type=\"dot\" dotVariant=\"error\"   dotSize=\"md\"></lib-badge>\n        <lib-badge type=\"dot\" dotVariant=\"error\"   dotSize=\"sm\"></lib-badge>\n      </div>\n    `,\n    moduleMetadata: { imports: [BadgeComponent] },\n  }),\n}"
-            },
-            {
-                "name": "AllVariants",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ui-components/src/lib/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -114,11 +366,33 @@
                 "name": "AllVariants",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ui-components/src/lib/badge/badge.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display:flex;align-items:center;gap:16px;padding:16px;background:var(--color-surface);flex-wrap:wrap;\">\n        <lib-badge type=\"numeric\" [count]=\"5\"   numericVariant=\"success\"></lib-badge>\n        <lib-badge type=\"numeric\" [count]=\"12\"  numericVariant=\"neutral\"></lib-badge>\n        <lib-badge type=\"numeric\" [count]=\"100\" numericVariant=\"success\"></lib-badge>\n        <lib-badge type=\"dot\" dotVariant=\"warning\" dotSize=\"md\"></lib-badge>\n        <lib-badge type=\"dot\" dotVariant=\"error\"   dotSize=\"md\"></lib-badge>\n        <lib-badge type=\"dot\" dotVariant=\"error\"   dotSize=\"sm\"></lib-badge>\n      </div>\n    `,\n    moduleMetadata: { imports: [BadgeComponent] },\n  }),\n}"
+            },
+            {
+                "name": "AllVariants",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ui-components/src/lib/tag/tag.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display:flex;gap:8px;align-items:center;padding:16px;background:var(--color-surface);flex-wrap:wrap;\">\n        <lib-tag variant=\"success\" label=\"啟用中\"></lib-tag>\n        <lib-tag variant=\"error\"   label=\"已失效\"></lib-tag>\n        <lib-tag variant=\"warning\" label=\"待審核\"></lib-tag>\n        <lib-tag variant=\"neutral\" label=\"草稿\"></lib-tag>\n        <lib-tag variant=\"info\"    label=\"資訊\"></lib-tag>\n      </div>\n    `,\n    moduleMetadata: { imports: [TagComponent] },\n  }),\n}"
+            },
+            {
+                "name": "banner",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "(label: string, color: string): string =>\n  'data:image/svg+xml;utf8,' +\n  encodeURIComponent(\n    `<svg xmlns='http://www.w3.org/2000/svg' width='343' height='80'>` +\n      `<rect width='343' height='80' fill='${color}'/>` +\n      `<text x='171' y='46' font-family='sans-serif' font-size='18' fill='white' text-anchor='middle'>${label}</text>` +\n      `</svg>`,\n  )",
+                "rawdescription": "Small landscape banner (343×80) for the carousel half of the expand demo.",
+                "description": "<p>Small landscape banner (343×80) for the carousel half of the expand demo.</p>\n"
             },
             {
                 "name": "banner",
@@ -143,6 +417,28 @@
                 "defaultValue": "{\n  args: {\n    title: '理賠申請',\n    leadingIcon:  'chevron-left',\n    trailingIcon: 'search',\n  },\n}"
             },
             {
+                "name": "COLORS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "['#298c7f', '#3a876b', '#50b45c']"
+            },
+            {
+                "name": "ContentWidth",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div style=\"width:375px;max-width:100%;font-family:var(--font-family-roboto);font-size:14px;color:var(--color-on-surface);\">\n        <lib-accordion-tabs [fill]=\"fill\" [selectedIndex]=\"selectedIndex\">${panels}</lib-accordion-tabs>\n      </div>`,\n  }),\n}",
+                "rawdescription": "Default — content-width headers, left-aligned (matches Figma Interactive Tab Bar).",
+                "description": "<p>Default — content-width headers, left-aligned (matches Figma Interactive Tab Bar).</p>\n"
+            },
+            {
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -151,6 +447,18 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}",
+                "rawdescription": "Large 9:16 previewer. Use the bottom-right icon buttons to switch images.",
+                "description": "<p>Large 9:16 previewer. Use the bottom-right icon buttons to switch images.</p>\n"
             },
             {
                 "name": "Default",
@@ -166,21 +474,21 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ui-components/src/lib/list/list.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{ args: { title: '保險理賠' } }"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ui-components/src/lib/icon-button/icon-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{ args: { icon: 'bell', size: 'sm', borderVariant: 'white' } }"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/list/list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{ args: { title: '保險理賠' } }"
             },
             {
                 "name": "Default",
@@ -256,16 +564,6 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ui-components/src/lib/list/list.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{ args: { title: '暫停功能', iconName: 'bell', disabled: true } }"
-            },
-            {
-                "name": "Disabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ui-components/src/lib/icon-button/icon-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -276,11 +574,31 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ui-components/src/lib/list/list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{ args: { title: '暫停功能', iconName: 'bell', disabled: true } }"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ui-components/src/lib/menu/menu.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{ args: { text: '暫停功能', disabled: true } }"
+            },
+            {
+                "name": "dollarIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "`<div style=\"width:32px;height:32px;border-radius:99px;background:linear-gradient(168deg,#9eeb5f,#0bae7d);\"></div>`"
             },
             {
                 "name": "DotError",
@@ -313,6 +631,30 @@
                 "defaultValue": "{ args: { variant: 'error',   label: '錯誤' } }"
             },
             {
+                "name": "ExpandFromCarousel",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj",
+                "defaultValue": "{\n  decorators: [moduleMetadata({ imports: [CarouselPreviewerExpandDemo] })],\n  render: () => ({ template: `<lib-carousel-previewer-expand-demo></lib-carousel-previewer-expand-demo>` }),\n}",
+                "rawdescription": "Tap/click a banner to expand it into a full-screen previewer at that index.",
+                "description": "<p>Tap/click a banner to expand it into a full-screen previewer at that index.</p>\n"
+            },
+            {
+                "name": "ExpandInline",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj",
+                "defaultValue": "{\n  decorators: [moduleMetadata({ imports: [CarouselPreviewerExpandDemo] })],\n  render: () => ({\n    props: { inline: true },\n    template: `<lib-carousel-previewer-expand-demo [inline]=\"inline\"></lib-carousel-previewer-expand-demo>`,\n  }),\n}",
+                "rawdescription": "Same expand wiring, but the previewer appears inline below (Figma Make behaviour).",
+                "description": "<p>Same expand wiring, but the previewer appears inline below (Figma Make behaviour).</p>\n"
+            },
+            {
                 "name": "Female",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -323,6 +665,18 @@
                 "defaultValue": "{ args: { gender: 'female', name: 'Jean Doe', size: 'md' } }"
             },
             {
+                "name": "Fill",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: { fill: true },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div style=\"width:375px;max-width:100%;font-family:var(--font-family-roboto);font-size:14px;color:var(--color-on-surface);\">\n        <lib-accordion-tabs [fill]=\"fill\" [selectedIndex]=\"selectedIndex\">${panels}</lib-accordion-tabs>\n      </div>`,\n  }),\n}",
+                "rawdescription": "Fill — headers share the row equally and stretch to fill the width.",
+                "description": "<p>Fill — headers share the row equally and stretch to fill the width.</p>\n"
+            },
+            {
                 "name": "Filled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -331,6 +685,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{ args: { appearance: 'filled'  } }"
+            },
+            {
+                "name": "Four",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{ render: () => wrap(pool.slice(0, 4)) }"
             },
             {
                 "name": "Group",
@@ -353,6 +717,28 @@
                 "defaultValue": "{ args: { activeIndex: 0 } }"
             },
             {
+                "name": "Horizontal",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div style=\"padding:16px;width:343px;background:var(--color-surface);\">\n        <lib-service-tile [label]=\"label\" [disabled]=\"disabled\" orientation=\"horizontal\">${dollarIcon}</lib-service-tile>\n      </div>`,\n    moduleMetadata: { imports: [ServiceTileComponent] },\n  }),\n}"
+            },
+            {
+                "name": "icon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "(color: string): string =>\n  'data:image/svg+xml;utf8,' +\n  encodeURIComponent(\n    `<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'>` +\n      `<circle cx='16' cy='16' r='15' fill='${color}'/>` +\n      `<text x='16' y='21' font-family='sans-serif' font-size='14' fill='white' text-anchor='middle'>$</text>` +\n      `</svg>`,\n  )",
+                "rawdescription": "Inline SVG circle icon so stories render without external assets.",
+                "description": "<p>Inline SVG circle icon so stories render without external assets.</p>\n"
+            },
+            {
                 "name": "Info",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -371,6 +757,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"max-width:375px;\">\n        <lib-navigation-bar\n          [items]=\"items\"\n          [activeIndex]=\"activeIndex\"\n          [showHomeIndicator]=\"true\"\n          (itemChange)=\"activeIndex = $event\"\n        ></lib-navigation-bar>\n      </div>\n    `,\n    props: {\n      items: defaultNavBarItems,\n      activeIndex: 0,\n    },\n    moduleMetadata: { imports: [NavigationBarComponent] },\n  }),\n}"
+            },
+            {
+                "name": "InteractiveTabBar",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/accordion/accordion.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Accordion 當作 tab header,點擊切換選取狀態(含 ripple),下方內容面板隨之更新。對應 Figma Make 的 Accordion → Interactive Tab Bar 範例。',\n      },\n    },\n  },\n  decorators: [moduleMetadata({ imports: [AccordionTabBarDemo] })],\n  render: () => ({\n    template: `<sb-accordion-tabbar-demo></sb-accordion-tabbar-demo>`,\n  }),\n}"
             },
             {
                 "name": "Large",
@@ -536,11 +932,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ui-components/src/lib/badge/badge.stories.ts",
+                "file": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<BadgeComponent>",
-                "defaultValue": "{\n  title: 'Components/Badge',\n  component: BadgeComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    type:           { control: 'radio',  options: ['numeric', 'dot'] },\n    numericVariant: { control: 'radio',  options: ['success', 'neutral'] },\n    dotVariant:     { control: 'radio',  options: ['warning', 'error'] },\n    dotSize:        { control: 'radio',  options: ['sm', 'md'] },\n    count:          { control: 'number' },\n  },\n  args: { type: 'numeric', count: 5, numericVariant: 'success' },\n}"
+                "type": "Meta<AccordionTabsComponent>",
+                "defaultValue": "{\n  title: 'Components/AccordionTabs',\n  component: AccordionTabsComponent,\n  tags: ['autodocs'],\n  decorators: [moduleMetadata({ imports: [AccordionTabsComponent, AccordionTabComponent] })],\n  argTypes: {\n    fill:          { control: 'boolean' },\n    selectedIndex: { control: { type: 'number', min: 0 } },\n  },\n  args: { fill: false, selectedIndex: 0 },\n}"
             },
             {
                 "name": "meta",
@@ -566,11 +962,31 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ui-components/src/lib/badge/badge.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<BadgeComponent>",
+                "defaultValue": "{\n  title: 'Components/Badge',\n  component: BadgeComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    type:           { control: 'radio',  options: ['numeric', 'dot'] },\n    numericVariant: { control: 'radio',  options: ['success', 'neutral'] },\n    dotVariant:     { control: 'radio',  options: ['warning', 'error'] },\n    dotSize:        { control: 'radio',  options: ['sm', 'md'] },\n    count:          { control: 'number' },\n  },\n  args: { type: 'numeric', count: 5, numericVariant: 'success' },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<CarouselPreviewerComponent>",
+                "defaultValue": "{\n  title: 'Components/Carousel Previewer',\n  component: CarouselPreviewerComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    // items 是內嵌 SVG data-URI 陣列,值極長會塞爆 Controls 面板;隱藏但仍由 args 提供。\n    items: { table: { disable: true } },\n    indexChange: { action: 'indexChange' },\n  },\n  args: { items: previewItems, initialIndex: 0 },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ui-components/src/lib/carousel/carousel.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<CarouselComponent>",
-                "defaultValue": "{\n  title: 'Components/Carousel',\n  component: CarouselComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    items:     { control: 'object' },\n    itemClick: { action: 'itemClick' },\n  },\n  args: { items: sampleItems },\n}"
+                "defaultValue": "{\n  title: 'Components/Carousel',\n  component: CarouselComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    // items 是內嵌 SVG data-URI 陣列,值極長會塞爆 Controls 面板;\n    // 從 Controls/autodocs 隱藏,值仍由 args 提供,預覽照常。\n    items:     { table: { disable: true } },\n    itemClick: { action: 'itemClick' },\n  },\n  args: { items: sampleItems },\n}"
             },
             {
                 "name": "meta",
@@ -586,16 +1002,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ui-components/src/lib/list/list.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<ListItemComponent>",
-                "defaultValue": "{\n  title: 'Components/ListItem',\n  component: ListItemComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    title:         { control: 'text'    },\n    iconName:      { control: { type: 'select' }, options: ['bell', 'user', 'search', 'eye', 'chevron-right', 'chevron-left'] },\n    showChevron:   { control: 'boolean' },\n    trailingCount: { control: 'number'  },\n    trailingText:  { control: 'text'    },\n    disabled:      { control: 'boolean' },\n    viewOnly:      { control: 'boolean' },\n    clicked:       { action: 'clicked'  },\n  },\n  args: {\n    title: '保險理賠',\n    showChevron: true,\n    disabled: false,\n  },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ui-components/src/lib/icon-button/icon-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -606,11 +1012,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ui-components/src/lib/navigation-bar/navigation-bar.stories.ts",
+                "file": "projects/ui-components/src/lib/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<NavigationBarComponent>",
-                "defaultValue": "{\n  title: 'Components/NavigationBar',\n  component: NavigationBarComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    activeIndex:       { control: { type: 'number', min: 0, max: 3 } },\n    showHomeIndicator: { control: 'boolean' },\n    itemChange:        { action: 'itemChange' },\n  },\n  args: {\n    items: defaultNavBarItems,\n    activeIndex: 0,\n    showHomeIndicator: true,\n  },\n  decorators: [\n    (story) => ({\n      ...story(),\n      template: `<div style=\"max-width:375px;\">${(story() as any).template ?? ''}</div>`,\n    }),\n  ],\n}"
+                "type": "Meta<ListItemComponent>",
+                "defaultValue": "{\n  title: 'Components/ListItem',\n  component: ListItemComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    title:         { control: 'text'    },\n    iconName:      { control: { type: 'select' }, options: ['bell', 'user', 'search', 'eye', 'chevron-right', 'chevron-left'] },\n    showChevron:   { control: 'boolean' },\n    trailingCount: { control: 'number'  },\n    trailingText:  { control: 'text'    },\n    disabled:      { control: 'boolean' },\n    viewOnly:      { control: 'boolean' },\n    clicked:       { action: 'clicked'  },\n  },\n  args: {\n    title: '保險理賠',\n    showChevron: true,\n    disabled: false,\n  },\n}"
             },
             {
                 "name": "meta",
@@ -621,6 +1027,16 @@
                 "deprecationMessage": "",
                 "type": "Meta<MenuItemComponent>",
                 "defaultValue": "{\n  title: 'Components/MenuItem',\n  component: MenuItemComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    text:     { control: 'text'    },\n    size:     { control: 'radio', options: ['M', 'S'] },\n    selected: { control: 'boolean' },\n    disabled: { control: 'boolean' },\n    clicked:  { action: 'clicked'  },\n  },\n  args: {\n    text: '保單總覽',\n    size: 'M',\n    selected: false,\n    disabled: false,\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/navigation-bar/navigation-bar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<NavigationBarComponent>",
+                "defaultValue": "{\n  title: 'Components/NavigationBar',\n  component: NavigationBarComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    activeIndex:       { control: { type: 'number', min: 0, max: 3 } },\n    showHomeIndicator: { control: 'boolean' },\n    itemChange:        { action: 'itemChange' },\n  },\n  args: {\n    items: defaultNavBarItems,\n    activeIndex: 0,\n    showHomeIndicator: true,\n  },\n  decorators: [\n    (story) => ({\n      ...story(),\n      template: `<div style=\"max-width:375px;\">${(story() as any).template ?? ''}</div>`,\n    }),\n  ],\n}"
             },
             {
                 "name": "meta",
@@ -666,11 +1082,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ServiceTileGroupComponent>",
+                "defaultValue": "{\n  title: 'Components/ServiceTileGroup',\n  component: ServiceTileGroupComponent,\n  tags: ['autodocs'],\n  args: { items: pool.slice(0, 4) },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<ServiceTileComponent>",
-                "defaultValue": "{\n  title: 'Components/ServiceTile',\n  component: ServiceTileComponent,\n  tags: ['autodocs'],\n  argTypes: { label: { control: 'text' }, iconSrc: { control: 'text' } },\n  args: { label: 'Nộp phí' },\n}"
+                "defaultValue": "{\n  title: 'Components/ServiceTile',\n  component: ServiceTileComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    label:       { control: 'text' },\n    iconSrc:     { control: 'text' },\n    orientation: { control: 'radio', options: ['vertical', 'horizontal'] },\n    disabled:    { control: 'boolean' },\n  },\n  args: { label: 'Nộp phí', orientation: 'vertical', disabled: false },\n}"
             },
             {
                 "name": "meta",
@@ -803,6 +1229,28 @@
                 "defaultValue": "{ args: { icon: 'search', borderVariant: 'outline' } }"
             },
             {
+                "name": "Overlay",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: { overlay: true },\n}",
+                "rawdescription": "Full-screen overlay (scrim + close button). Dismiss via close / backdrop / Esc.",
+                "description": "<p>Full-screen overlay (scrim + close button). Dismiss via close / backdrop / Esc.</p>\n"
+            },
+            {
+                "name": "panels",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "`\n  <lib-accordion-tab label=\"產品\">產品內容:壽險、醫療險、意外險等商品列表與保障說明。</lib-accordion-tab>\n  <lib-accordion-tab label=\"服務\">服務內容:理賠申請、保單批改、繳費與帳戶管理。</lib-accordion-tab>\n  <lib-accordion-tab label=\"關於\">關於我們:公司簡介、服務據點與經營理念。</lib-accordion-tab>\n  <lib-accordion-tab label=\"聯絡\" [disabled]=\"true\">聯絡我們:客服專線 0800-000-000。</lib-accordion-tab>\n`"
+            },
+            {
                 "name": "Pill",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -823,6 +1271,16 @@
                 "defaultValue": "{ args: { activeIndex: 1 } }"
             },
             {
+                "name": "pool",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "ServiceTileItem[]",
+                "defaultValue": "[\n  { label: '繳費', iconSrc: icon('#2e9f6d') },\n  { label: '理賠', iconSrc: icon('#3a876b') },\n  { label: '批改', iconSrc: icon('#50b45c') },\n  { label: 'DM',   iconSrc: icon('#3b74df') },\n  { label: '保單', iconSrc: icon('#298c7f') },\n  { label: '帳戶', iconSrc: icon('#1f7a5a') },\n]"
+            },
+            {
                 "name": "preview",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -831,6 +1289,28 @@
                 "deprecationMessage": "",
                 "type": "Preview",
                 "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n       color: /(background|color)$/i,\n       date: /Date$/i,\n      },\n    },\n  },\n}"
+            },
+            {
+                "name": "preview",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "(label: string, color: string): string =>\n  'data:image/svg+xml;utf8,' +\n  encodeURIComponent(\n    `<svg xmlns='http://www.w3.org/2000/svg' width='343' height='610'>` +\n      `<rect width='343' height='610' fill='${color}'/>` +\n      `<text x='171' y='305' font-family='sans-serif' font-size='28' fill='white' text-anchor='middle'>${label}</text>` +\n      `</svg>`,\n  )",
+                "rawdescription": "Inline portrait SVG (9:16, 343×610) so stories render without external assets.",
+                "description": "<p>Inline portrait SVG (9:16, 343×610) so stories render without external assets.</p>\n"
+            },
+            {
+                "name": "previewItems",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n  preview('Preview 1', COLORS[0]),\n  preview('Preview 2', COLORS[1]),\n  preview('Preview 3', COLORS[2]),\n]"
             },
             {
                 "name": "Primary",
@@ -861,6 +1341,16 @@
                 "deprecationMessage": "",
                 "type": "[]",
                 "defaultValue": "[\n  banner('Banner 1', '#298c7f'),\n  banner('Banner 2', '#3a876b'),\n  banner('Banner 3', '#50b45c'),\n]"
+            },
+            {
+                "name": "Scroll",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{ render: () => wrap(pool.slice(0, 6)) }"
             },
             {
                 "name": "Secondary",
@@ -903,6 +1393,16 @@
                 "defaultValue": "{ args: { text: '理賠申請', selected: true } }"
             },
             {
+                "name": "Single",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{ render: () => wrap(pool.slice(0, 1)) }"
+            },
+            {
                 "name": "SingleBanner",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -913,6 +1413,18 @@
                 "defaultValue": "{\n  args: { items: [banner('Single Banner', '#298c7f')] },\n}"
             },
             {
+                "name": "SingleImage",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: { items: [preview('Single Preview', COLORS[0])] },\n}",
+                "rawdescription": "Single image — navigation controls are hidden when there's nothing to switch to.",
+                "description": "<p>Single image — navigation controls are hidden when there&#39;s nothing to switch to.</p>\n"
+            },
+            {
                 "name": "SizeS",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -920,7 +1432,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{ args: { text: 'Sao chép', size: 'S' } }"
+                "defaultValue": "{\n  args: { text: 'Sao chép', size: 'S' },\n  render: (args) => ({\n    props: args,\n    template: `<div style=\"width:120px;\"><lib-menu-item [text]=\"text\" size=\"S\"></lib-menu-item></div>`,\n    moduleMetadata: { imports: [MenuItemComponent] },\n  }),\n}"
             },
             {
                 "name": "Small",
@@ -940,7 +1452,9 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display:flex;flex-direction:column;width:120px;\">\n        <lib-menu-item text=\"複製\" size=\"S\"></lib-menu-item>\n        <lib-menu-item text=\"貼上\" size=\"S\"></lib-menu-item>\n        <lib-menu-item text=\"刪除\" size=\"S\"></lib-menu-item>\n      </div>\n    `,\n    moduleMetadata: { imports: [MenuItemComponent] },\n  }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <lib-menu-group>\n        <lib-menu-item text=\"複製\" size=\"S\"></lib-menu-item>\n        <lib-menu-item text=\"加買\" size=\"S\"></lib-menu-item>\n        <lib-menu-item text=\"收據\" size=\"S\"></lib-menu-item>\n      </lib-menu-group>\n    `,\n    moduleMetadata: { imports: [MenuItemComponent, MenuGroupComponent] },\n  }),\n}",
+                "rawdescription": "S 按鈕組合情境 — menu_group (Figma node 601:612)",
+                "description": "<p>S 按鈕組合情境 — menu_group (Figma node 601:612)</p>\n"
             },
             {
                 "name": "Stat",
@@ -980,7 +1494,9 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display:flex;gap:0;border-bottom:1px solid var(--color-outline-grey);padding:0 16px;background:#fff;\">\n        <lib-accordion label=\"全部\"   [selected]=\"true\"></lib-accordion>\n        <lib-accordion label=\"進行中\" [selected]=\"false\"></lib-accordion>\n        <lib-accordion label=\"已完成\" [selected]=\"false\"></lib-accordion>\n        <lib-accordion label=\"已取消\" [disabled]=\"true\"></lib-accordion>\n      </div>\n    `,\n    moduleMetadata: { imports: [AccordionComponent] },\n  }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display:flex;gap:0;border-bottom:1px solid var(--color-outline-grey);padding:0 16px;background:#fff;\">\n        <lib-accordion label=\"全部\"   [selected]=\"true\"></lib-accordion>\n        <lib-accordion label=\"進行中\" [selected]=\"false\"></lib-accordion>\n        <lib-accordion label=\"已完成\" [selected]=\"false\"></lib-accordion>\n        <lib-accordion label=\"已取消\" [disabled]=\"true\"></lib-accordion>\n      </div>\n    `,\n    moduleMetadata: { imports: [AccordionComponent] },\n  }),\n}",
+                "rawdescription": "Static tab row — shows selected / unselected / disabled side by side\n(visual reference only; selection is fixed).",
+                "description": "<p>Static tab row — shows selected / unselected / disabled side by side\n(visual reference only; selection is fixed).</p>\n"
             },
             {
                 "name": "Text",
@@ -991,6 +1507,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{ args: { appearance: 'text'    } }"
+            },
+            {
+                "name": "Three",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{ render: () => wrap(pool.slice(0, 3)) }"
             },
             {
                 "name": "TitleOnly",
@@ -1023,6 +1549,16 @@
                 "defaultValue": "{\n  args: {\n    title: '通知',\n    leadingIcon:  null,\n    trailingIcon: 'bell',\n  },\n}"
             },
             {
+                "name": "Two",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{ render: () => wrap(pool.slice(0, 2)) }"
+            },
+            {
                 "name": "Unselected",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1051,6 +1587,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    statusLabel: '上傳失敗',\n    statusVariant: 'error',\n  },\n}"
+            },
+            {
+                "name": "Vertical",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div style=\"padding:16px;width:120px;background:var(--color-surface);\">\n        <lib-service-tile [label]=\"label\" [disabled]=\"disabled\" orientation=\"vertical\">${dollarIcon}</lib-service-tile>\n      </div>`,\n    moduleMetadata: { imports: [ServiceTileComponent] },\n  }),\n}"
             },
             {
                 "name": "Warning",
@@ -1161,6 +1707,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: { appearance: 'outline', trailingIcon: 'chevron-right', label: 'Next' },\n}"
+            },
+            {
+                "name": "wrap",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "(items: ServiceTileItem[]) => ({\n  props: { items },\n  template: `<div style=\"width:343px;padding:16px;background:var(--color-surface);\">\n    <lib-service-tile-group [items]=\"items\"></lib-service-tile-group>\n  </div>`,\n  moduleMetadata: { imports: [ServiceTileGroupComponent] },\n})"
             }
         ],
         "functions": [],
@@ -1224,8 +1780,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<BadgeComponent>",
-                "file": "projects/ui-components/src/lib/badge/badge.stories.ts",
+                "rawtype": "StoryObj<AccordionTabsComponent>",
+                "file": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1257,6 +1813,28 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<BadgeComponent>",
+                "file": "projects/ui-components/src/lib/badge/badge.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<CarouselPreviewerComponent>",
+                "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<CarouselComponent>",
                 "file": "projects/ui-components/src/lib/carousel/carousel.stories.ts",
                 "deprecated": false,
@@ -1279,17 +1857,6 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<ListItemComponent>",
-                "file": "projects/ui-components/src/lib/list/list.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
                 "rawtype": "StoryObj<IconButtonComponent>",
                 "file": "projects/ui-components/src/lib/icon-button/icon-button.stories.ts",
                 "deprecated": false,
@@ -1301,8 +1868,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<NavigationBarComponent>",
-                "file": "projects/ui-components/src/lib/navigation-bar/navigation-bar.stories.ts",
+                "rawtype": "StoryObj<ListItemComponent>",
+                "file": "projects/ui-components/src/lib/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1314,6 +1881,17 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<MenuItemComponent>",
                 "file": "projects/ui-components/src/lib/menu/menu.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<NavigationBarComponent>",
+                "file": "projects/ui-components/src/lib/navigation-bar/navigation-bar.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1358,6 +1936,17 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<SectionHeaderComponent>",
                 "file": "projects/ui-components/src/lib/section-header/section-header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<ServiceTileGroupComponent>",
+                "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1985,6 +2574,122 @@
                     "defaultValue": "{ args: { variant: 'warning', label: '警告' } }"
                 }
             ],
+            "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts": [
+                {
+                    "name": "banner",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "(label: string, color: string): string =>\n  'data:image/svg+xml;utf8,' +\n  encodeURIComponent(\n    `<svg xmlns='http://www.w3.org/2000/svg' width='343' height='80'>` +\n      `<rect width='343' height='80' fill='${color}'/>` +\n      `<text x='171' y='46' font-family='sans-serif' font-size='18' fill='white' text-anchor='middle'>${label}</text>` +\n      `</svg>`,\n  )",
+                    "rawdescription": "Small landscape banner (343×80) for the carousel half of the expand demo.",
+                    "description": "<p>Small landscape banner (343×80) for the carousel half of the expand demo.</p>\n"
+                },
+                {
+                    "name": "COLORS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "['#298c7f', '#3a876b', '#50b45c']"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}",
+                    "rawdescription": "Large 9:16 previewer. Use the bottom-right icon buttons to switch images.",
+                    "description": "<p>Large 9:16 previewer. Use the bottom-right icon buttons to switch images.</p>\n"
+                },
+                {
+                    "name": "ExpandFromCarousel",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj",
+                    "defaultValue": "{\n  decorators: [moduleMetadata({ imports: [CarouselPreviewerExpandDemo] })],\n  render: () => ({ template: `<lib-carousel-previewer-expand-demo></lib-carousel-previewer-expand-demo>` }),\n}",
+                    "rawdescription": "Tap/click a banner to expand it into a full-screen previewer at that index.",
+                    "description": "<p>Tap/click a banner to expand it into a full-screen previewer at that index.</p>\n"
+                },
+                {
+                    "name": "ExpandInline",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj",
+                    "defaultValue": "{\n  decorators: [moduleMetadata({ imports: [CarouselPreviewerExpandDemo] })],\n  render: () => ({\n    props: { inline: true },\n    template: `<lib-carousel-previewer-expand-demo [inline]=\"inline\"></lib-carousel-previewer-expand-demo>`,\n  }),\n}",
+                    "rawdescription": "Same expand wiring, but the previewer appears inline below (Figma Make behaviour).",
+                    "description": "<p>Same expand wiring, but the previewer appears inline below (Figma Make behaviour).</p>\n"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<CarouselPreviewerComponent>",
+                    "defaultValue": "{\n  title: 'Components/Carousel Previewer',\n  component: CarouselPreviewerComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    // items 是內嵌 SVG data-URI 陣列,值極長會塞爆 Controls 面板;隱藏但仍由 args 提供。\n    items: { table: { disable: true } },\n    indexChange: { action: 'indexChange' },\n  },\n  args: { items: previewItems, initialIndex: 0 },\n}"
+                },
+                {
+                    "name": "Overlay",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: { overlay: true },\n}",
+                    "rawdescription": "Full-screen overlay (scrim + close button). Dismiss via close / backdrop / Esc.",
+                    "description": "<p>Full-screen overlay (scrim + close button). Dismiss via close / backdrop / Esc.</p>\n"
+                },
+                {
+                    "name": "preview",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "(label: string, color: string): string =>\n  'data:image/svg+xml;utf8,' +\n  encodeURIComponent(\n    `<svg xmlns='http://www.w3.org/2000/svg' width='343' height='610'>` +\n      `<rect width='343' height='610' fill='${color}'/>` +\n      `<text x='171' y='305' font-family='sans-serif' font-size='28' fill='white' text-anchor='middle'>${label}</text>` +\n      `</svg>`,\n  )",
+                    "rawdescription": "Inline portrait SVG (9:16, 343×610) so stories render without external assets.",
+                    "description": "<p>Inline portrait SVG (9:16, 343×610) so stories render without external assets.</p>\n"
+                },
+                {
+                    "name": "previewItems",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n  preview('Preview 1', COLORS[0]),\n  preview('Preview 2', COLORS[1]),\n  preview('Preview 3', COLORS[2]),\n]"
+                },
+                {
+                    "name": "SingleImage",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: { items: [preview('Single Preview', COLORS[0])] },\n}",
+                    "rawdescription": "Single image — navigation controls are hidden when there's nothing to switch to.",
+                    "description": "<p>Single image — navigation controls are hidden when there&#39;s nothing to switch to.</p>\n"
+                }
+            ],
             "projects/ui-components/src/lib/carousel/carousel.stories.ts": [
                 {
                     "name": "banner",
@@ -2016,7 +2721,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<CarouselComponent>",
-                    "defaultValue": "{\n  title: 'Components/Carousel',\n  component: CarouselComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    items:     { control: 'object' },\n    itemClick: { action: 'itemClick' },\n  },\n  args: { items: sampleItems },\n}"
+                    "defaultValue": "{\n  title: 'Components/Carousel',\n  component: CarouselComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    // items 是內嵌 SVG data-URI 陣列,值極長會塞爆 Controls 面板;\n    // 從 Controls/autodocs 隱藏,值仍由 args 提供,預覽照常。\n    items:     { table: { disable: true } },\n    itemClick: { action: 'itemClick' },\n  },\n  args: { items: sampleItems },\n}"
                 },
                 {
                     "name": "sampleItems",
@@ -2037,6 +2742,52 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n  args: { items: [banner('Single Banner', '#298c7f')] },\n}"
+                }
+            ],
+            "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts": [
+                {
+                    "name": "ContentWidth",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div style=\"width:375px;max-width:100%;font-family:var(--font-family-roboto);font-size:14px;color:var(--color-on-surface);\">\n        <lib-accordion-tabs [fill]=\"fill\" [selectedIndex]=\"selectedIndex\">${panels}</lib-accordion-tabs>\n      </div>`,\n  }),\n}",
+                    "rawdescription": "Default — content-width headers, left-aligned (matches Figma Interactive Tab Bar).",
+                    "description": "<p>Default — content-width headers, left-aligned (matches Figma Interactive Tab Bar).</p>\n"
+                },
+                {
+                    "name": "Fill",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: { fill: true },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div style=\"width:375px;max-width:100%;font-family:var(--font-family-roboto);font-size:14px;color:var(--color-on-surface);\">\n        <lib-accordion-tabs [fill]=\"fill\" [selectedIndex]=\"selectedIndex\">${panels}</lib-accordion-tabs>\n      </div>`,\n  }),\n}",
+                    "rawdescription": "Fill — headers share the row equally and stretch to fill the width.",
+                    "description": "<p>Fill — headers share the row equally and stretch to fill the width.</p>\n"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<AccordionTabsComponent>",
+                    "defaultValue": "{\n  title: 'Components/AccordionTabs',\n  component: AccordionTabsComponent,\n  tags: ['autodocs'],\n  decorators: [moduleMetadata({ imports: [AccordionTabsComponent, AccordionTabComponent] })],\n  argTypes: {\n    fill:          { control: 'boolean' },\n    selectedIndex: { control: { type: 'number', min: 0 } },\n  },\n  args: { fill: false, selectedIndex: 0 },\n}"
+                },
+                {
+                    "name": "panels",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "`\n  <lib-accordion-tab label=\"產品\">產品內容:壽險、醫療險、意外險等商品列表與保障說明。</lib-accordion-tab>\n  <lib-accordion-tab label=\"服務\">服務內容:理賠申請、保單批改、繳費與帳戶管理。</lib-accordion-tab>\n  <lib-accordion-tab label=\"關於\">關於我們:公司簡介、服務據點與經營理念。</lib-accordion-tab>\n  <lib-accordion-tab label=\"聯絡\" [disabled]=\"true\">聯絡我們:客服專線 0800-000-000。</lib-accordion-tab>\n`"
                 }
             ],
             "projects/ui-components/src/lib/list/list.stories.ts": [
@@ -2170,7 +2921,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{ args: { text: 'Sao chép', size: 'S' } }"
+                    "defaultValue": "{\n  args: { text: 'Sao chép', size: 'S' },\n  render: (args) => ({\n    props: args,\n    template: `<div style=\"width:120px;\"><lib-menu-item [text]=\"text\" size=\"S\"></lib-menu-item></div>`,\n    moduleMetadata: { imports: [MenuItemComponent] },\n  }),\n}"
                 },
                 {
                     "name": "SmallMenu",
@@ -2180,7 +2931,9 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display:flex;flex-direction:column;width:120px;\">\n        <lib-menu-item text=\"複製\" size=\"S\"></lib-menu-item>\n        <lib-menu-item text=\"貼上\" size=\"S\"></lib-menu-item>\n        <lib-menu-item text=\"刪除\" size=\"S\"></lib-menu-item>\n      </div>\n    `,\n    moduleMetadata: { imports: [MenuItemComponent] },\n  }),\n}"
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <lib-menu-group>\n        <lib-menu-item text=\"複製\" size=\"S\"></lib-menu-item>\n        <lib-menu-item text=\"加買\" size=\"S\"></lib-menu-item>\n        <lib-menu-item text=\"收據\" size=\"S\"></lib-menu-item>\n      </lib-menu-group>\n    `,\n    moduleMetadata: { imports: [MenuItemComponent, MenuGroupComponent] },\n  }),\n}",
+                    "rawdescription": "S 按鈕組合情境 — menu_group (Figma node 601:612)",
+                    "description": "<p>S 按鈕組合情境 — menu_group (Figma node 601:612)</p>\n"
                 }
             ],
             "projects/ui-components/src/lib/policy-card/policy-card.stories.ts": [
@@ -2279,6 +3032,16 @@
                     "defaultValue": "{ args: { label: '停用',   disabled: true  } }"
                 },
                 {
+                    "name": "InteractiveTabBar",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/accordion/accordion.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Accordion 當作 tab header,點擊切換選取狀態(含 ripple),下方內容面板隨之更新。對應 Figma Make 的 Accordion → Interactive Tab Bar 範例。',\n      },\n    },\n  },\n  decorators: [moduleMetadata({ imports: [AccordionTabBarDemo] })],\n  render: () => ({\n    template: `<sb-accordion-tabbar-demo></sb-accordion-tabbar-demo>`,\n  }),\n}"
+                },
+                {
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
@@ -2306,7 +3069,9 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display:flex;gap:0;border-bottom:1px solid var(--color-outline-grey);padding:0 16px;background:#fff;\">\n        <lib-accordion label=\"全部\"   [selected]=\"true\"></lib-accordion>\n        <lib-accordion label=\"進行中\" [selected]=\"false\"></lib-accordion>\n        <lib-accordion label=\"已完成\" [selected]=\"false\"></lib-accordion>\n        <lib-accordion label=\"已取消\" [disabled]=\"true\"></lib-accordion>\n      </div>\n    `,\n    moduleMetadata: { imports: [AccordionComponent] },\n  }),\n}"
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display:flex;gap:0;border-bottom:1px solid var(--color-outline-grey);padding:0 16px;background:#fff;\">\n        <lib-accordion label=\"全部\"   [selected]=\"true\"></lib-accordion>\n        <lib-accordion label=\"進行中\" [selected]=\"false\"></lib-accordion>\n        <lib-accordion label=\"已完成\" [selected]=\"false\"></lib-accordion>\n        <lib-accordion label=\"已取消\" [disabled]=\"true\"></lib-accordion>\n      </div>\n    `,\n    moduleMetadata: { imports: [AccordionComponent] },\n  }),\n}",
+                    "rawdescription": "Static tab row — shows selected / unselected / disabled side by side\n(visual reference only; selection is fixed).",
+                    "description": "<p>Static tab row — shows selected / unselected / disabled side by side\n(visual reference only; selection is fixed).</p>\n"
                 },
                 {
                     "name": "Unselected",
@@ -2369,6 +3134,152 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{ args: { label: 'Unselected', selected: false } }"
+                }
+            ],
+            "projects/ui-components/src/lib/service-tile/service-tile.stories.ts": [
+                {
+                    "name": "dollarIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "`<div style=\"width:32px;height:32px;border-radius:99px;background:linear-gradient(168deg,#9eeb5f,#0bae7d);\"></div>`"
+                },
+                {
+                    "name": "Horizontal",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div style=\"padding:16px;width:343px;background:var(--color-surface);\">\n        <lib-service-tile [label]=\"label\" [disabled]=\"disabled\" orientation=\"horizontal\">${dollarIcon}</lib-service-tile>\n      </div>`,\n    moduleMetadata: { imports: [ServiceTileComponent] },\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<ServiceTileComponent>",
+                    "defaultValue": "{\n  title: 'Components/ServiceTile',\n  component: ServiceTileComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    label:       { control: 'text' },\n    iconSrc:     { control: 'text' },\n    orientation: { control: 'radio', options: ['vertical', 'horizontal'] },\n    disabled:    { control: 'boolean' },\n  },\n  args: { label: 'Nộp phí', orientation: 'vertical', disabled: false },\n}"
+                },
+                {
+                    "name": "Row",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display:flex;gap:8px;padding:16px;max-width:375px;background:var(--color-surface);\">\n        <lib-service-tile label=\"Nộp phí\"><div style=\"width:32px;height:32px;border-radius:99px;background:linear-gradient(168deg,#9eeb5f,#0bae7d);\"></div></lib-service-tile>\n        <lib-service-tile label=\"Bồi thường\"><div style=\"width:32px;height:32px;border-radius:8px;background:#36b0ce;\"></div></lib-service-tile>\n        <lib-service-tile label=\"Sửa đổi bổ sung\"><div style=\"width:32px;height:32px;border-radius:8px;background:#3b74df;\"></div></lib-service-tile>\n        <lib-service-tile label=\"DM\"><div style=\"width:32px;height:32px;border-radius:8px;background:#f5a623;\"></div></lib-service-tile>\n      </div>\n    `,\n    moduleMetadata: { imports: [ServiceTileComponent] },\n  }),\n}"
+                },
+                {
+                    "name": "Vertical",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div style=\"padding:16px;width:120px;background:var(--color-surface);\">\n        <lib-service-tile [label]=\"label\" [disabled]=\"disabled\" orientation=\"vertical\">${dollarIcon}</lib-service-tile>\n      </div>`,\n    moduleMetadata: { imports: [ServiceTileComponent] },\n  }),\n}"
+                }
+            ],
+            "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts": [
+                {
+                    "name": "Four",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{ render: () => wrap(pool.slice(0, 4)) }"
+                },
+                {
+                    "name": "icon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "(color: string): string =>\n  'data:image/svg+xml;utf8,' +\n  encodeURIComponent(\n    `<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'>` +\n      `<circle cx='16' cy='16' r='15' fill='${color}'/>` +\n      `<text x='16' y='21' font-family='sans-serif' font-size='14' fill='white' text-anchor='middle'>$</text>` +\n      `</svg>`,\n  )",
+                    "rawdescription": "Inline SVG circle icon so stories render without external assets.",
+                    "description": "<p>Inline SVG circle icon so stories render without external assets.</p>\n"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<ServiceTileGroupComponent>",
+                    "defaultValue": "{\n  title: 'Components/ServiceTileGroup',\n  component: ServiceTileGroupComponent,\n  tags: ['autodocs'],\n  args: { items: pool.slice(0, 4) },\n}"
+                },
+                {
+                    "name": "pool",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ServiceTileItem[]",
+                    "defaultValue": "[\n  { label: '繳費', iconSrc: icon('#2e9f6d') },\n  { label: '理賠', iconSrc: icon('#3a876b') },\n  { label: '批改', iconSrc: icon('#50b45c') },\n  { label: 'DM',   iconSrc: icon('#3b74df') },\n  { label: '保單', iconSrc: icon('#298c7f') },\n  { label: '帳戶', iconSrc: icon('#1f7a5a') },\n]"
+                },
+                {
+                    "name": "Scroll",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{ render: () => wrap(pool.slice(0, 6)) }"
+                },
+                {
+                    "name": "Single",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{ render: () => wrap(pool.slice(0, 1)) }"
+                },
+                {
+                    "name": "Three",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{ render: () => wrap(pool.slice(0, 3)) }"
+                },
+                {
+                    "name": "Two",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{ render: () => wrap(pool.slice(0, 2)) }"
+                },
+                {
+                    "name": "wrap",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "(items: ServiceTileItem[]) => ({\n  props: { items },\n  template: `<div style=\"width:343px;padding:16px;background:var(--color-surface);\">\n    <lib-service-tile-group [items]=\"items\"></lib-service-tile-group>\n  </div>`,\n  moduleMetadata: { imports: [ServiceTileGroupComponent] },\n})"
                 }
             ],
             "projects/ui-components/src/stories/button.stories.ts": [
@@ -2561,28 +3472,6 @@
                     "defaultValue": "{ args: { title: '開始續保', actionLabel: '' } }"
                 }
             ],
-            "projects/ui-components/src/lib/service-tile/service-tile.stories.ts": [
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<ServiceTileComponent>",
-                    "defaultValue": "{\n  title: 'Components/ServiceTile',\n  component: ServiceTileComponent,\n  tags: ['autodocs'],\n  argTypes: { label: { control: 'text' }, iconSrc: { control: 'text' } },\n  args: { label: 'Nộp phí' },\n}"
-                },
-                {
-                    "name": "Row",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display:flex;gap:8px;padding:16px;max-width:375px;background:var(--color-surface);\">\n        <lib-service-tile label=\"Nộp phí\"><div style=\"width:32px;height:32px;border-radius:99px;background:linear-gradient(168deg,#9eeb5f,#0bae7d);\"></div></lib-service-tile>\n        <lib-service-tile label=\"Bồi thường\"><div style=\"width:32px;height:32px;border-radius:8px;background:#36b0ce;\"></div></lib-service-tile>\n        <lib-service-tile label=\"Sửa đổi bổ sung\"><div style=\"width:32px;height:32px;border-radius:8px;background:#3b74df;\"></div></lib-service-tile>\n        <lib-service-tile label=\"DM\"><div style=\"width:32px;height:32px;border-radius:8px;background:#f5a623;\"></div></lib-service-tile>\n      </div>\n    `,\n    moduleMetadata: { imports: [ServiceTileComponent] },\n  }),\n}"
-                }
-            ],
             "projects/ui-components/.storybook/preview.ts": [
                 {
                     "name": "preview",
@@ -2664,13 +3553,13 @@
                     "kind": 184
                 }
             ],
-            "projects/ui-components/src/lib/badge/badge.stories.ts": [
+            "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<BadgeComponent>",
-                    "file": "projects/ui-components/src/lib/badge/badge.stories.ts",
+                    "rawtype": "StoryObj<AccordionTabsComponent>",
+                    "file": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -2703,6 +3592,32 @@
                     "kind": 184
                 }
             ],
+            "projects/ui-components/src/lib/badge/badge.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<BadgeComponent>",
+                    "file": "projects/ui-components/src/lib/badge/badge.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<CarouselPreviewerComponent>",
+                    "file": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
             "projects/ui-components/src/lib/carousel/carousel.stories.ts": [
                 {
                     "name": "Story",
@@ -2729,19 +3644,6 @@
                     "kind": 184
                 }
             ],
-            "projects/ui-components/src/lib/list/list.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<ListItemComponent>",
-                    "file": "projects/ui-components/src/lib/list/list.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
             "projects/ui-components/src/lib/icon-button/icon-button.stories.ts": [
                 {
                     "name": "Story",
@@ -2755,13 +3657,13 @@
                     "kind": 184
                 }
             ],
-            "projects/ui-components/src/lib/navigation-bar/navigation-bar.stories.ts": [
+            "projects/ui-components/src/lib/list/list.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<NavigationBarComponent>",
-                    "file": "projects/ui-components/src/lib/navigation-bar/navigation-bar.stories.ts",
+                    "rawtype": "StoryObj<ListItemComponent>",
+                    "file": "projects/ui-components/src/lib/list/list.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -2775,6 +3677,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<MenuItemComponent>",
                     "file": "projects/ui-components/src/lib/menu/menu.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ui-components/src/lib/navigation-bar/navigation-bar.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<NavigationBarComponent>",
+                    "file": "projects/ui-components/src/lib/navigation-bar/navigation-bar.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -2833,6 +3748,19 @@
                     "kind": 184
                 }
             ],
+            "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ServiceTileGroupComponent>",
+                    "file": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
             "projects/ui-components/src/lib/service-tile/service-tile.stories.ts": [
                 {
                     "name": "Story",
@@ -2880,7 +3808,7 @@
         "children": []
     },
     "coverage": {
-        "count": 0,
+        "count": 7,
         "status": "low",
         "files": [
             {
@@ -2894,11 +3822,89 @@
                 "status": "low"
             },
             {
+                "filePath": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ContentWidth",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Fill",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "panels",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/accordion-tabs/accordion-tabs.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/accordion/accordion.stories.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AccordionTabBarDemo",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/accordion/accordion.stories.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DemoTab",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
                 "filePath": "projects/ui-components/src/lib/accordion/accordion.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/accordion/accordion.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "InteractiveTabBar",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -2929,9 +3935,9 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "TabGroup",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
             },
             {
                 "filePath": "projects/ui-components/src/lib/accordion/accordion.stories.ts",
@@ -3285,6 +4291,125 @@
             },
             {
                 "filePath": "projects/ui-components/src/lib/button/button.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CarouselPreviewerExpandDemo",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "banner",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "COLORS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ExpandFromCarousel",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ExpandInline",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Overlay",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "preview",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "previewItems",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SingleImage",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/carousel/carousel-previewer.stories.ts",
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
@@ -3669,9 +4794,9 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "SmallMenu",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
             },
             {
                 "filePath": "projects/ui-components/src/lib/menu/menu.stories.ts",
@@ -3944,6 +5069,126 @@
                 "status": "low"
             },
             {
+                "filePath": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Four",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "icon",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "pool",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Scroll",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Single",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Three",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Two",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "wrap",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/service-tile/service-tile-group.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "dollarIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Horizontal",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -3959,6 +5204,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Row",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components/src/lib/service-tile/service-tile.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Vertical",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
